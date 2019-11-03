@@ -85,7 +85,8 @@ export default class Transactions extends Component {
                         </MDBCol>
                         <MDBCol md="1" sm="1" className="m-1">
                           <div className="round-button">
-                            <a className=" text-light" href={`/transactions/${account._id}`}>open</a>
+                            {/* <a className=" text-light" href={`/transactions/${account._id}`}>open</a> */}
+                            <a className=" text-light">open</a>
                           </div>
                         </MDBCol>
                       </MDBRow>

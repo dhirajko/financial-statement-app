@@ -122,13 +122,14 @@ class CapitalForm extends Component {
               <MDBBtn
                 color="primary"
                 disabled={
-                  this.state.debitAccountName === "" ||
-                  this.state.amount <= 0 ||
-                  this.state.creditAccountName === "" ||
-                  this.state.debitTag === "" ||
-                  this.state.creditTag === ""
-                    ? true
-                    : false
+                  true
+                  // this.state.debitAccountName === "" ||
+                  // this.state.amount <= 0 ||
+                  // this.state.creditAccountName === "" ||
+                  // this.state.debitTag === "" ||
+                  // this.state.creditTag === ""
+                  //   ? true
+                  //   : false
                 }
                 onClick={() => {
                   axios
@@ -148,7 +149,6 @@ class CapitalForm extends Component {
                         headers: {
                           "Content-Type": "application/json",
                           "x-auth-token": getLocalStorage(JWT_TOKEN)
-                          
                         }
                       }
                     )

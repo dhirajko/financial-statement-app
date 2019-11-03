@@ -83,7 +83,7 @@ class Income extends Component {
     ];
     this.props.accounts.map(account => {
       if (income.includes(account.tag)) {
-       return inital.push({
+        return inital.push({
           label: account.accountName.toUpperCase(),
           value: account._id
         });
@@ -213,17 +213,18 @@ class Income extends Component {
                   color="primary"
                   onClick={() => this.props.createTransaction(this.state.data)}
                   disabled={
-                    this.state.data.date === "" ||
-                    this.state.data.descreption === "" ||
-                    this.state.data.amount === 0 ||
-                    this.state.data.debitAccount === "" ||
-                    this.state.data.debitAccount === "*" ||
-                    this.state.data.creditAccount === "" ||
-                    this.state.data.creditAccount === "*" ||
-                    this.state.data.debitAccount ===
-                      this.state.data.creditAccount
-                      ? true
-                      : false
+                    true
+                    // this.state.data.date === "" ||
+                    // this.state.data.descreption === "" ||
+                    // this.state.data.amount === 0 ||
+                    // this.state.data.debitAccount === "" ||
+                    // this.state.data.debitAccount === "*" ||
+                    // this.state.data.creditAccount === "" ||
+                    // this.state.data.creditAccount === "*" ||
+                    // this.state.data.debitAccount ===
+                    //   this.state.data.creditAccount
+                    //   ? true
+                    //   : false
                   }
                 >
                   Save changes
@@ -284,12 +285,13 @@ class Income extends Component {
                 this.toggle();
               }}
               disabled={
-                this.state.creatAccountAlias === "" ||
-                this.state.createAccounttag === "" ||
-                this.state.createAccountName === "" ||
-                this.state.createAccountInventoryAffect === ""
-                  ? true
-                  : false
+                true
+                // this.state.creatAccountAlias === "" ||
+                // this.state.createAccounttag === "" ||
+                // this.state.createAccountName === "" ||
+                // this.state.createAccountInventoryAffect === ""
+                //   ? true
+                //   : false
               }
             >
               Save changes

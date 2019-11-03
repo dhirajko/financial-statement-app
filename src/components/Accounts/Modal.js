@@ -142,14 +142,14 @@ class Modal extends Component {
                         this.props.createAccount(this.state.data);
                         history.push("/account");
                       }}
-                      disabled={
-                        this.state.data.accountName === "" ||
-                        this.state.data.tag === "" ||
-                        this.state.data.alias === "" ||
-                        this.state.data.inventoryAffects === "" ||
-                        this.state.data.descreption === ""
-                          ? true
-                          : false
+                      disabled={ true
+                        // this.state.data.accountName === "" ||
+                        // this.state.data.tag === "" ||
+                        // this.state.data.alias === "" ||
+                        // this.state.data.inventoryAffects === "" ||
+                        // this.state.data.descreption === ""
+                        //   ? true
+                        //   : false
                       }
                     >
                       Save changes

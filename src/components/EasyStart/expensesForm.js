@@ -99,6 +99,7 @@ class Expenses extends Component {
   };
 
   createCurrentAssets = () => {
+    console.log(this.props.accounts, "acc");
     let initial = [
       { label: "", value: "" },
       { label: "CREATE CURRENT ASSETS", value: "*" }
@@ -233,17 +234,18 @@ class Expenses extends Component {
                   color="primary"
                   onClick={() => this.props.createTransaction(this.state.data)}
                   disabled={
-                    this.state.data.date === "" ||
-                    this.state.data.descreption === "" ||
-                    this.state.data.amount === 0 ||
-                    this.state.data.debitAccount === "" ||
-                    this.state.data.debitAccount === "*" ||
-                    this.state.data.creditAccount === "" ||
-                    this.state.data.creditAccount === "*" ||
-                    this.state.data.debitAccount ===
-                      this.state.data.creditAccount
-                      ? true
-                      : false
+                    true
+                    // this.state.data.date === "" ||
+                    // this.state.data.descreption === "" ||
+                    // this.state.data.amount === 0 ||
+                    // this.state.data.debitAccount === "" ||
+                    // this.state.data.debitAccount === "*" ||
+                    // this.state.data.creditAccount === "" ||
+                    // this.state.data.creditAccount === "*" ||
+                    // this.state.data.debitAccount ===
+                    //   this.state.data.creditAccount
+                    //   ? true
+                    //   : false
                   }
                 >
                   Save changes
@@ -302,12 +304,13 @@ class Expenses extends Component {
                 this.toggle();
               }}
               disabled={
-                this.state.creatAccountAlias === "" ||
-                this.state.createAccounttag === "" ||
-                this.state.createAccountName === "" ||
-                this.state.createAccountInventoryAffect === ""
-                  ? true
-                  : false
+                true
+                // this.state.creatAccountAlias === "" ||
+                // this.state.createAccounttag === "" ||
+                // this.state.createAccountName === "" ||
+                // this.state.createAccountInventoryAffect === ""
+                //   ? true
+                //   : false
               }
             >
               Save changes

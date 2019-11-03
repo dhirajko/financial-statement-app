@@ -172,15 +172,16 @@ class Modal extends Component {
                         this.toggle();
                       }}
                       disabled={
-                        this.state.data.date === "" ||
-                        this.state.data.descreption === "" ||
-                        this.state.data.amount === 0 ||
-                        this.state.data.debitAccount === "" ||
-                        this.state.data.creditAccount === "" ||
-                        this.state.data.debitAccount ===
-                          this.state.data.creditAccount
-                          ? true
-                          : false
+                        true
+                        // this.state.data.date === "" ||
+                        // this.state.data.descreption === "" ||
+                        // this.state.data.amount === 0 ||
+                        // this.state.data.debitAccount === "" ||
+                        // this.state.data.creditAccount === "" ||
+                        // this.state.data.debitAccount ===
+                        //   this.state.data.creditAccount
+                        //   ? true
+                        //   : false
                       }
                     >
                       Save changes
