@@ -149,14 +149,13 @@ class CapitalForm extends Component {
                         headers: {
                           "Content-Type": "application/json",
                           "x-auth-token": getLocalStorage(JWT_TOKEN)
+
                         }
                       }
                     )
                     .then(res => {
                       Toast("success", "Add Balance Success");
-                      setTimeout(() => {
-                        window.location.reload(true);
-                      }, 500);
+                      history.push("/dashboard")
                     });
                 }}
               >
