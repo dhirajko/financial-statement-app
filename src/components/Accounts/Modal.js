@@ -89,14 +89,14 @@ class Modal extends Component {
                     name="accountName"
                     label="Account name"
                     margin="normal"
-                    onChange={e => this.handleChange(e)}
+                    // onChange={e => this.handleChange(e)}
                     fullWidth
                   />
                   <FormikTextField
                     name="alias"
                     label="Alias"
                     margin="normal"
-                    onChange={e => this.handleChange(e)}
+                    // onChange={e => this.handleChange(e)}
                     fullWidth
                   />
 
@@ -104,7 +104,7 @@ class Modal extends Component {
                     name="tag"
                     label="Tag"
                     margin="normal"
-                    onChange={e => this.handleCurrentChange(e)}
+                    // onChange={e => this.handleCurrentChange(e)}
                     options={this.createOptions(list)}
                     onClick={e => {
                       if (e.target.value === "") {
@@ -118,7 +118,7 @@ class Modal extends Component {
                     name="inventoryAffects"
                     label="Inventory Affected"
                     margin="normal"
-                    onChange={e => this.handleRadioChange(e)}
+                    // onChange={e => this.handleRadioChange(e)}
                     options={[
                       { label: "No", value: "false" },
                       { label: "Yes", value: "true" }
@@ -129,7 +129,7 @@ class Modal extends Component {
                     name="descreption"
                     label="Descreption"
                     margin="normal"
-                    onChange={e => this.handleChange(e)}
+                    // onChange={e => this.handleChange(e)}
                     fullWidth
                   />
                   <MDBModalFooter>
