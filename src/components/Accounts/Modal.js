@@ -82,7 +82,8 @@ class Modal extends Component {
         <MDBModal isOpen={this.state.modal} toggle={this.toggle}>
           <MDBModalHeader toggle={this.toggle}>Create account</MDBModalHeader>
           <MDBModalBody>
-            <Formik validationSchema={validationSchema}>
+          {/* validationSchema={validationSchema}> */}
+            <Formik> 
               {({ isValid }) => (
                 <Form autoComplete="off">
                   <FormikTextField

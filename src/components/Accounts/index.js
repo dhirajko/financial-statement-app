@@ -76,7 +76,7 @@ export default class Accounts extends Component {
               </div>
             )}
           </MDBContainer>
-          <span style={{ position: "fixed", right: 50, bottom: 50 }}>
+          <span  className="d-none" style={{ position: "fixed", right: 50, bottom: 50 }}>
             <Modal createAccount={this.props.createAccount}></Modal>
           </span>
         </div>
