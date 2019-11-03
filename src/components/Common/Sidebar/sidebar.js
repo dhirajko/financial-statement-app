@@ -6,6 +6,9 @@ import "./sidebar.css";
 class Sidebar extends React.Component {
   constructor(props) {
     super(props);
+    this.state = {
+      load: false
+    };
   }
   render() {
     const sidebarOpen = this.props.sidebar;
@@ -14,16 +17,16 @@ class Sidebar extends React.Component {
       <nav className={`sidenav ${sidebarOpen ? "active" : ""}`}>
         <ul>
           <li onClick={this.props.onSetSidebarOpen}>
-            <a>
+            <span>
               {sidebarOpen ? (
                 <i className="fa fa-times pl-1"></i>
               ) : (
                 <i className="fa fa-bars pl-1"></i>
               )}
-            </a>
+            </span>
           </li>
           <li>
-            <a
+            <span
               onClick={() => {
                 history.push("/dashboard");
               }}
@@ -34,14 +37,14 @@ class Sidebar extends React.Component {
               }
             >
               <i className="fa fa-home"></i>{" "}
-              <span style={!sidebarOpen ? { display: "none" } : {}}>
+              <b style={!sidebarOpen ? { display: "none" } : {}}>
                 Dashboard
-              </span>
-            </a>
+              </b>
+            </span>
           </li>
 
           <li>
-            <a
+            <span
               onClick={() => {
                 this.props.searchAccounts();
                 history.push("/accounts");
@@ -53,13 +56,13 @@ class Sidebar extends React.Component {
               }
             >
               <i className="fas fa-chart-bar"></i>{" "}
-              <span style={!sidebarOpen ? { display: "none" } : {}}>
+              <b style={!sidebarOpen ? { display: "none" } : {}}>
                 Accounts
-              </span>
-            </a>
+              </b>
+            </span>
           </li>
           <li>
-            <a
+            <span
               onClick={() => {
                 this.props.searchTransactions();
                 history.push("/transactions");
@@ -71,10 +74,10 @@ class Sidebar extends React.Component {
               }
             >
               <i className="fas fa-hand-holding-usd"></i>{" "}
-              <span style={!sidebarOpen ? { display: "none" } : {}}>
+              <b style={!sidebarOpen ? { display: "none" } : {}}>
                 transactions
-              </span>
-            </a>
+              </b>
+            </span>
           </li>
         </ul>
       </nav>

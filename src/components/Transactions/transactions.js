@@ -25,7 +25,7 @@ export default class Transactions extends Component {
     return (
       <div id="apppage">
         <div className="dash-page">
-          <MDBContainer center id="page-wrap">
+          <MDBContainer className="text-center" id="page-wrap">
             <div className="text-center">
               <span className="list-page-heading">Transactions</span>
             </div>

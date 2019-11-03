@@ -32,22 +32,22 @@
 /* .sidenav ul li {
   margin-top: 20px;
 } */
-.sidenav ul li a {
+.sidenav ul li span {
   padding: 20px;
   display: flex;
   align-items: center;
   color: #f3f8fd;
   text-decoration: none;
 }
-.sidenav ul li a.sidebar-link-inactive:hover {
+.sidenav ul li span.sidebar-link-inactive:hover {
   background-color: #830300;
 }
-.sidenav ul li a span {
+.sidenav ul li span b {
   padding-left: 10px;
   font-size: 20px;
   text-transform: uppercase;
 }
-.sidenav ul li a.sidebar-link {
+.sidenav ul li span.sidebar-link {
   background-color: rgba(0, 0, 0, 0.7);
 }
 

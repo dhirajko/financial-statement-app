@@ -33,7 +33,7 @@ class Statement extends Component {
         <MDBNav tabs>
           <ul className="nav nav-pills mb-5">
             <li className="nav-item">
-              <a
+              <span
                 className={
                   this.state.activeItem === "1"
                     ? " btn btn-secondary "
@@ -42,10 +42,10 @@ class Statement extends Component {
                 onClick={this.toggle("1")}
               >
                 Trial Balance
-              </a>
+              </span>
             </li>
             <li className="nav-item">
-              <a
+              <span
                 className={
                   this.state.activeItem === "2"
                     ? " btn btn-secondary "
@@ -54,10 +54,10 @@ class Statement extends Component {
                 onClick={this.toggle("2")}
               >
                 Profit and Loss
-              </a>
+              </span>
             </li>
             <li className="nav-item">
-              <a
+              <span
                 className={
                   this.state.activeItem === "3"
                     ? " btn btn-secondary "
@@ -66,7 +66,7 @@ class Statement extends Component {
                 onClick={this.toggle("3")}
               >
                 Balance Sheet
-              </a>
+              </span>
             </li>
           </ul>
         </MDBNav>

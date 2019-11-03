@@ -6,7 +6,6 @@ import {
   MDBBtn,
   MDBCard,
   MDBCardBody,
-  MDBCardImage,
   MDBCardTitle,
   MDBCardText
 } from "mdbreact";
@@ -33,17 +32,15 @@ class Home extends Component {
                 <MDBCardBody>
                   <MDBCardTitle>For Demo</MDBCardTitle>
                   <MDBCardText>
-                    <pre>
-                      username: dhiraj@koirala.com <br/>
-                      password :dhiraj@koirala
-                    </pre>
+                    username: dhiraj@koirala.com <br />
+                    password :dhiraj@koirala
                   </MDBCardText>
                   <MDBBtn href="/login">login</MDBBtn>
                 </MDBCardBody>
               </MDBCard>
             </MDBCol>
             <MDBCol md="12" className="mt-3">
-              <div class="row d-flex ">
+              <div className="row d-flex ">
                 <div className="col-sm">
                   <img
                     src="http://api.ning.com/files/B39IGTQRALkhSMbjQQUo-aOefuwwLsGrNGfMB4h0aLNN-4OtY*eoFHwL-5VtNnoSdtVpY84xJaeV2nWfR2RHl5G786-q4ve0/TCNewHat192.png"
@@ -60,7 +57,7 @@ class Home extends Component {
                     graphical form.
                   </p>
                 </div>
-                <div class="col-sm">
+                <div className="col-sm">
                   {" "}
                   <img
                     src="http://api.ning.com/files/B39IGTQRALliaKqgChk9araXv05mYhYO7kWdDqeWlNA8ZPNiORJDteP-hn0A5GNuu35tmgz8M9C*npG3LdsoLiL7yW2TYhzf/Business.png"
@@ -75,7 +72,7 @@ class Home extends Component {
                     form or individual records.
                   </p>
                 </div>
-                <div class="col-sm">
+                <div className="col-sm">
                   {" "}
                   <img
                     src="http://api.ning.com/files/B39IGTQRALlkWU-8Z5ruh-ZVwv-mTT3aVWHwdTYX84IUgnAbPHwZYFYCLkdA0o4zrimjBPgKTtzS1NP*KSWHAMbf59MCH-rp/TurboCASHCloud2.png"

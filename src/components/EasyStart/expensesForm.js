@@ -29,27 +29,32 @@ const validationSchema = Yup.object().shape({
 });
 
 class Expenses extends Component {
-  state = {
-    selectOption: e => this.createAccountListOption(e),
-    modal: false,
-    createAccountName: "",
-    creatAccountAlias: "",
-    createAccounttag: "",
-    createAccountInventoryAffect: "",
-    data: {
-      date: new Date(),
-      debitAccount: "",
-      creditAccount: "",
-      amount: 0,
-      descreption: ""
-    }
-  };
+  constructor(props) {
+    super(props);
+    this.state = {
+      selectOption: e => this.createAccountListOption(e),
+      modal: false,
+      createAccountName: "",
+      creatAccountAlias: "",
+      createAccounttag: "",
+      createAccountInventoryAffect: "",
+      data: {
+        date: new Date(),
+        debitAccount: "",
+        creditAccount: "",
+        amount: 0,
+        descreption: ""
+      }
+    };
+  }
 
   toggle = () => {
     this.setState({
       createAccountName: "",
       creatAccountAlias: "",
       createAccounttag: "",
+      creditAccount: "",
+      debitAccount: "",
       modal: !this.state.modal
     });
   };
@@ -77,36 +82,36 @@ class Expenses extends Component {
   };
 
   createExpenses = () => {
-    let inital = [
+    let initial = [
       { label: "", value: "" },
       { label: "CREATE EXPENSES", value: "*" }
     ];
 
     this.props.accounts.map(account => {
       if (expenses.includes(account.tag)) {
-        inital.push({
+        initial.push({
           label: account.accountName.toUpperCase(),
           value: account._id
         });
       }
     });
-    return inital;
+    return initial;
   };
 
   createCurrentAssets = () => {
-    let inital = [
+    let initial = [
       { label: "", value: "" },
       { label: "CREATE CURRENT ASSETS", value: "*" }
     ];
     this.props.accounts.map(account => {
       if (currentAssets.includes(account.tag)) {
-        inital.push({
+        initial.push({
           label: account.accountName.toUpperCase(),
           value: account._id
         });
       }
     });
-    return inital;
+    return initial;
   };
 
   createAccountListOption = array => {
@@ -116,9 +121,6 @@ class Expenses extends Component {
         <select
           className="form-control w-75"
           onChange={e => {
-            this.setState({ createAccounttag: e.target.value });
-          }}
-          onClick={e => {
             this.setState({ createAccounttag: e.target.value });
           }}
         >
@@ -171,7 +173,13 @@ class Expenses extends Component {
                 options={this.createExpenses()}
                 onChange={this.handleCurrentChange}
                 onClick={e => {
-                  if (e.target.value === "*") {
+                  this.setState({
+                    debitAccount: "*"
+                  });
+                  if (
+                    this.state.debitAccount === "*" &&
+                    e.target.value === "*"
+                  ) {
                     this.setState({
                       selectOption: this.createAccountListOption(expenses),
                       modal: true
@@ -181,20 +189,27 @@ class Expenses extends Component {
                 fullWidth
                 native
               />
+
               <FormikSelectField
                 name="creditAccount"
                 label="Paid By : "
                 margin="normal"
+                options={this.createCurrentAssets()}
                 onChange={this.handleCurrentChange}
                 onClick={e => {
-                  if (e.target.value === "*") {
+                  this.setState({
+                    creditAccount: "*"
+                  });
+                  if (
+                    this.state.creditAccount === "*" &&
+                    e.target.value === "*"
+                  ) {
                     this.setState({
                       selectOption: this.createAccountListOption(currentAssets),
                       modal: true
                     });
                   }
                 }}
-                options={this.createCurrentAssets()}
                 fullWidth
                 native
               />
@@ -257,14 +272,11 @@ class Expenses extends Component {
             <label>inventory Affected?</label>
             <select
               className="form-control"
-              onchange={e => {
-                console.log(e.target);
-              }}
-              onClick={e => {
+              defaultValue="false"
+              onChange={e => {
                 this.setState({ createAccountInventoryAffect: e.target.value });
               }}
             >
-              <option disabled selected></option>
               <option name="" value="true">
                 TRUE
               </option>

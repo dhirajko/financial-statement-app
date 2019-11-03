@@ -15,7 +15,7 @@ import {
   FormikSelectField,
   FormikRadioGroupField
 } from "formik-material-fields";
-import {list}from "../../constants/Tags"
+import { list } from "../../constants/Tags";
 import "../../App.css";
 
 const validationSchema = Yup.object().shape({
@@ -63,12 +63,12 @@ class Modal extends Component {
 
   createOptions = type => {
     let inital = [{ label: "SELECT ACCOUNT TYPE", value: "" }];
-    type.map(account => {
+    type.map(account =>
       inital.push({
         label: account.toUpperCase(),
         value: account
-      });
-    });
+      })
+    );
     return inital;
   };
 
@@ -133,7 +133,7 @@ class Modal extends Component {
                     fullWidth
                   />
                   <MDBModalFooter>
-                    <MDBBtn color="secondary" onClick={(this.toggle)}>
+                    <MDBBtn color="secondary" onClick={this.toggle}>
                       Close
                     </MDBBtn>
                     <MDBBtn

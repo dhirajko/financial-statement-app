@@ -37,11 +37,12 @@ export default class EasyStart extends Component {
   };
 
   updateAcccountList = () => {
-    this.componentDidMount();
+    this.props.searchAccounts();
+   
   };
 
   render() {
-    const accounts = this.props.accounts;
+    const {accounts} = this.props;
 
     return (
       <div id="apppage">
@@ -52,9 +53,8 @@ export default class EasyStart extends Component {
                 <MDBRow>
                   <MDBCol md="10">
                     <MDBCardTitle
-                      className="text-center"
-                      style={{ fontSize: "15px" }}
                       className="text-center text-uppercase align-bottom"
+                      style={{ fontSize: "15px" }}
                     >
                       Introduce Balance to business
                     </MDBCardTitle>
@@ -68,7 +68,7 @@ export default class EasyStart extends Component {
                     </MDBCollapse>
                   </MDBCol>
                   <MDBCol className=" text-center">
-                    {this.state.collapseID == "1" ? (
+                    {this.state.collapseID === "1" ? (
                       <i
                         color="primary"
                         onClick={this.toggleCollapse("")}
@@ -97,9 +97,8 @@ export default class EasyStart extends Component {
                 <MDBRow>
                   <MDBCol md="10">
                     <MDBCardTitle
-                      className="text-center"
-                      style={{ fontSize: "15px" }}
                       className="text-center text-uppercase align-bottom"
+                      style={{ fontSize: "15px" }}
                     >
                       Add expenses
                     </MDBCardTitle>
@@ -119,7 +118,7 @@ export default class EasyStart extends Component {
                     </MDBCollapse>
                   </MDBCol>
                   <MDBCol className=" text-center">
-                    {this.state.collapseID == "2" ? (
+                    {this.state.collapseID === "2" ? (
                       <i
                         color="primary"
                         onClick={this.toggleCollapse("")}
@@ -147,9 +146,8 @@ export default class EasyStart extends Component {
                 <MDBRow>
                   <MDBCol md="10">
                     <MDBCardTitle
-                      className="text-center"
-                      style={{ fontSize: "15px" }}
                       className="text-center text-uppercase align-bottom"
+                      style={{ fontSize: "15px" }}
                     >
                       Add Income
                     </MDBCardTitle>
@@ -169,7 +167,7 @@ export default class EasyStart extends Component {
                     </MDBCollapse>
                   </MDBCol>
                   <MDBCol className=" text-center">
-                    {this.state.collapseID == "3" ? (
+                    {this.state.collapseID === "3" ? (
                       <i
                         color="primary"
                         onClick={this.toggleCollapse("")}

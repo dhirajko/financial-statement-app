@@ -63,12 +63,12 @@ class Modal extends Component {
 
   createOptions = () => {
     let inital = [{ label: "select credit account", value: "" }];
-    this.props.accounts.map(account => {
+    this.props.accounts.map(account =>
       inital.push({
         label: account.accountName.toUpperCase(),
         value: account._id
-      });
-    });
+      })
+    );
     return inital;
   };
 

@@ -15,13 +15,16 @@ import moment from "moment";
 class Transaction extends Component {
   constructor(props) {
     super(props);
+    this.state = {
+      load: false
+    };
   }
-componentDidMount() {
-  this.props.searchTransaction(this.props.match.params.id);
-}
+  componentDidMount() {
+    this.props.searchTransaction(this.props.match.params.id);
+  }
   render() {
     const { transaction } = this.props;
-    console.log(transaction, "r")
+    console.log(transaction, "r");
 
     return (
       <MDBContainer className="mt-5 text-center">

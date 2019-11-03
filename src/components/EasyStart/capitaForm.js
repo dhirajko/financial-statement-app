@@ -9,7 +9,6 @@ import Toast from "../Common/Toast/Toast";
 import Radio from "@material-ui/core/Radio";
 import RadioGroup from "@material-ui/core/RadioGroup";
 import { Input, FormControlLabel } from "@material-ui/core";
-import history from "../../utils/history"
 import "../../App.css";
 
 const validationSchema = Yup.object().shape({
@@ -57,7 +56,7 @@ class CapitalForm extends Component {
                 <FormControlLabel
                   value="bank"
                   control={<Radio color="primary" />}
-                  label="Cash"
+                  label="Bank Account"
                   labelPlacement="start"
                   onChange={() =>
                     this.setState({
@@ -115,7 +114,6 @@ class CapitalForm extends Component {
                 placeholder="Introduced amount"
                 name="amount"
                 label="amount"
-                margin="normal"
                 type="number"
                 className="form-control"
                 onChange={e => this.handleChange(e)}
@@ -150,13 +148,15 @@ class CapitalForm extends Component {
                         headers: {
                           "Content-Type": "application/json",
                           "x-auth-token": getLocalStorage(JWT_TOKEN)
-
+                          
                         }
                       }
                     )
                     .then(res => {
                       Toast("success", "Add Balance Success");
-                      history.push("/dashboard")
+                      setTimeout(() => {
+                        window.location.reload(true);
+                      }, 500);
                     });
                 }}
               >

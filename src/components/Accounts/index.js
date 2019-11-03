@@ -29,7 +29,7 @@ export default class Accounts extends Component {
                     className="p-3 rounded-circle"
                     onClick={this.props.fetchAccounts}
                   >
-                    <img src={reload} alt="image not found" height="50"></img>
+                    <img src={reload} alt="not found" height="50" />
                   </MDBBtn>
                 </MDBCol>
               </MDBRow>
