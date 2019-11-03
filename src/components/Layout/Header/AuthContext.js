@@ -38,7 +38,8 @@ class AuthProvider extends Component {
         { email, password },
         {
           headers: {
-            "Access-Control-Allow-Origin": "*"
+            "Access-Control-Allow-Origin": "*",
+            "Content-Type": "application/json"
           }
         }
       )
@@ -69,8 +70,6 @@ class AuthProvider extends Component {
   };
 
   register = ({ email, password, name }) => {
-    console.log(email, password, name);
-
     return axios.post(
       API_URL + "api/user",
       {
@@ -84,8 +83,8 @@ class AuthProvider extends Component {
 
       {
         headers: {
-          Accept: "application/json",
-          "Access-Control-Allow-Origin": "*"
+          "Access-Control-Allow-Origin": "*",
+          "Content-Type": "application/json"
         }
       }
     );
