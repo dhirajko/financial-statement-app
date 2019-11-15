@@ -9,6 +9,7 @@ class AccountContainer extends Component {
   searchAccount = id => {
     this.props.actions.fetchAccountsById(id);
   };
+
   render() {
     return (
       <Account

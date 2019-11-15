@@ -1,4 +1,5 @@
 import React from "react";
+import * as ReactDOM from "react-dom";
 import { withRouter, Switch } from "react-router-dom";
 
 import PublicRoute from "../../routes/PublicRoute";
@@ -21,6 +22,10 @@ import {
 
 const App = () => (
   <React.Fragment>
+    {ReactDOM.createPortal(
+     "Financial App",
+      window.document.getElementsByTagName('title')[0]
+    )}
     <Switch>
       <PublicRoute exact path="/" layout={StaticLayout} component={AsyncHome} />
       <PublicRoute

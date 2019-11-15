@@ -122,14 +122,13 @@ class CapitalForm extends Component {
               <MDBBtn
                 color="primary"
                 disabled={
-                  true
-                  // this.state.debitAccountName === "" ||
-                  // this.state.amount <= 0 ||
-                  // this.state.creditAccountName === "" ||
-                  // this.state.debitTag === "" ||
-                  // this.state.creditTag === ""
-                  //   ? true
-                  //   : false
+                  this.state.debitAccountName === "" ||
+                  this.state.amount <= 0 ||
+                  this.state.creditAccountName === "" ||
+                  this.state.debitTag === "" ||
+                  this.state.creditTag === ""
+                    ? true
+                    : false
                 }
                 onClick={() => {
                   axios

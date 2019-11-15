@@ -32,6 +32,7 @@ export const fetchAccounts = () => {
 
 export const fetchAccountsById = id => {
   return dispatch => {
+    dispatch(cleanAccount());
     dispatch(accountFetchRequest());
     return fetch(`api/accounts/${id}`)
       .then(response => {

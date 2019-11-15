@@ -33,7 +33,7 @@ class Home extends Component {
                   <MDBCardTitle>For Demo</MDBCardTitle>
                   <MDBCardText>
                     username: dhiraj@koirala.com <br />
-                    password :dhiraj@koirala
+                    password :P@ssWORD10
                   </MDBCardText>
                   <MDBBtn href="/login">login</MDBBtn>
                 </MDBCardBody>

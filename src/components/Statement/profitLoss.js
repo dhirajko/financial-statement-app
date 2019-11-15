@@ -51,23 +51,23 @@ export default class ProfitLoss extends Component {
                 <MDBCol sm="12" lg="6" className="p-2">
                   <span className="statement-heading">Expenses</span>
 
-                  {expenses.map(account => (
-                    <MDBCard className="p-1  m-1">
+                  {expenses.map((account, index) => (
+                    <MDBCard className="p-1  m-1" key={index}>
                       {" "}
                       <MDBRow className="m-2">
                         <MDBCol md="8" className="text-left">
-                          {(account.accountName).toUpperCase()}
+                          {account.accountName.toUpperCase()}
                         </MDBCol>
                         <MDBCol md="4">{account.closingBalance}</MDBCol>
                       </MDBRow>
                     </MDBCard>
                   ))}
-                  {status === "LOSS" ? (
+                  {status === "PROFIT" ? (
                     <MDBCard className="p-1  m-1 statement-heading">
                       {" "}
                       <MDBRow className="m-2">
                         <MDBCol md="8" className="text-left">
-                          <span>Loss</span>
+                          <span>PROFIT</span>
                         </MDBCol>
                         <MDBCol md="4">{amount}</MDBCol>
                       </MDBRow>
@@ -89,44 +89,36 @@ export default class ProfitLoss extends Component {
                         <MDBCol md="8" className="text-left">
                           TOTAL
                         </MDBCol>
-                        <MDBCol md="4" >{creditTotal}</MDBCol>
+                        <MDBCol md="4">{creditTotal}</MDBCol>
                       </MDBRow>
                     </MDBCard>
                   </div>
                 </MDBCol>
                 <MDBCol sm="12" lg="6" className="p-2 ">
                   <span className="statement-heading ">Incomes</span>
-                  {incomes.length < 1 ? (
-                    <MDBCard className="p-1 m-1">
-                      {" "}
-                      <MDBRow className="m-2">
-                        <MDBCol md="8" className="text-left">
-                          Income
-                        </MDBCol>
-                        <MDBCol md="4">0</MDBCol>
-                      </MDBRow>
-                    </MDBCard>
-                  ) : (
-                    incomes.map(account => (
-                      <MDBCard className="p-1 m-1">
-                        {" "}
-                        <MDBRow className="m-2">
-                          <MDBCol md="8" className="text-left">
-                            {account.accountName.toUpperCase()}
-                          </MDBCol>
-                          <MDBCol md="4">{account.closingBalance}</MDBCol>
-                        </MDBRow>
-                      </MDBCard>
-                    ))
-                  )}
-                  {status === "PROFIT" ? (
+                  {incomes.length > 0
+                    ? incomes.map((account, index) => (
+                        <MDBCard className="p-1 m-1" key={index}>
+                          {" "}
+                          <MDBRow className="m-2">
+                            <MDBCol md="8" className="text-left">
+                              {account.accountName.toUpperCase()}
+                            </MDBCol>
+                            <MDBCol md="4">{account.closingBalance}</MDBCol>
+                          </MDBRow>
+                        </MDBCard>
+                      ))
+                    : ""}
+                  {status === "LOSS" ? (
                     <MDBCard className="p-1  m-1">
                       {" "}
                       <MDBRow className="m-2">
                         <MDBCol md="8" className="text-left statement-heading">
-                          <span>PROFIT</span>
+                          <span>LOSS</span>
                         </MDBCol>
-                        <MDBCol md="4" className="statement-heading">{amount}</MDBCol>
+                        <MDBCol md="4" className="statement-heading">
+                          {amount * -1}
+                        </MDBCol>
                       </MDBRow>
                     </MDBCard>
                   ) : (

@@ -80,14 +80,9 @@ class Modal extends Component {
           +
         </button>
         <MDBModal isOpen={this.state.modal} toggle={this.toggle}>
-          <MDBModalHeader
-            toggle={this.toggle}
-            onClick={() => {
-              console.log(this.state);
-            }}
-          >
+          <MDBModalHeader toggle={this.toggle}>
             {" "}
-            Create Transaction
+            Create Transaction <span className="text-danger" style={{fontSize: "15px"}}>(Currently disabled)</span>
           </MDBModalHeader>
           <MDBModalBody>
             <Formik
@@ -172,16 +167,16 @@ class Modal extends Component {
                         this.toggle();
                       }}
                       disabled={
-                        true
-                        // this.state.data.date === "" ||
-                        // this.state.data.descreption === "" ||
-                        // this.state.data.amount === 0 ||
-                        // this.state.data.debitAccount === "" ||
-                        // this.state.data.creditAccount === "" ||
-                        // this.state.data.debitAccount ===
-                        //   this.state.data.creditAccount
-                        //   ? true
-                        //   : false
+                        true ||
+                        this.state.data.date === "" ||
+                        this.state.data.descreption === "" ||
+                        this.state.data.amount === 0 ||
+                        this.state.data.debitAccount === "" ||
+                        this.state.data.creditAccount === "" ||
+                        this.state.data.debitAccount ===
+                          this.state.data.creditAccount
+                          ? true
+                          : false
                       }
                     >
                       Save changes

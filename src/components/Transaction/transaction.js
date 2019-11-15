@@ -24,7 +24,6 @@ class Transaction extends Component {
   }
   render() {
     const { transaction } = this.props;
-    console.log(transaction, "r");
 
     return (
       <MDBContainer className="mt-5 text-center">
@@ -35,6 +34,7 @@ class Transaction extends Component {
         ) : (
           <MDBRow center>
             <MDBCol>
+              {console.log(transaction)}
               <MDBJumbotron className="text-center">
                 <MDBCardTitle className="card-title h4 pb-2">
                   <strong>Transaction Details</strong>
@@ -46,7 +46,7 @@ class Transaction extends Component {
                         className="font-effect-shadow-multiple account-balance-inventory"
                         style={{ fontSize: "15px" }}
                       >
-                        {moment().format("DD-MM-YYYY")}
+                        Date : {moment(transaction.date).format("Do MMM  YY")}
                       </span>
                     </MDBCol>
                     <MDBCol md="6" sm="6">

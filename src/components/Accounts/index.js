@@ -1,7 +1,17 @@
 import React, { Component } from "react";
-import { MDBRow, MDBCol, MDBContainer, MDBCard, MDBBtn } from "mdbreact";
+import {
+  MDBRow,
+  MDBCol,
+  MDBContainer,
+  MDBCard,
+  MDBBtn,
+  MDBTable,
+  MDBTableBody,
+  MDBTableHead
+} from "mdbreact";
 import reload from "../../assets/reload.png";
 import Modal from "./Modal";
+import history from "../../utils/history";
 import "../../App.css";
 
 export default class Accounts extends Component {
@@ -15,7 +25,7 @@ export default class Accounts extends Component {
   render() {
     const accounts = this.props.accounts;
     return (
-      <div id="apppage">
+      <div id="apppage" className="mb-3">
         <div className="dash-page">
           <MDBContainer id="page-wrap">
             <div className="text-center">
@@ -23,60 +33,87 @@ export default class Accounts extends Component {
             </div>
 
             {Object.keys(accounts).length === 0 ? (
-              <MDBRow className="text-center">
-                <MDBCol middle>
-                  <MDBBtn
-                    className="p-3 rounded-circle"
-                    onClick={this.props.fetchAccounts}
-                  >
-                    <img src={reload} alt="not found" height="50" />
-                  </MDBBtn>
-                </MDBCol>
-              </MDBRow>
+              this.props.fetchAccounts()
             ) : (
               <div>
-                {accounts.map((account, index) => {
-                  return (
-                    <MDBCard className="p-3 text-center  m-3" key={account._id}>
-                      <MDBRow className="w-100 align-items-center ">
-                        <MDBCol md="2" sm="2">
-                          <span
-                            className="font-effect-shadow-multiple"
-                            style={{ fontSize: "30px" }}
+                <MDBCard className="p-3 text-centerm-3">
+                  <MDBTable hover>
+                    <MDBTableHead>
+                      <tr>
+                        <th>S.No.</th>
+                        <th>Account Name</th>
+                        <th>Tags</th>
+                        <th>Balance</th>
+                        <th></th>
+                      </tr>
+                    </MDBTableHead>
+                    <MDBTableBody>
+                      {accounts.map((account, index) => {
+                        return (
+                          <tr
+                            className="pointer"
+                            onClick={() =>
+                              history.push(`/accounts/${account._id}`)
+                            }
+                            key={account._id}
                           >
-                            {index + 1}
-                          </span>
-                        </MDBCol>
-                        <MDBCol md="6" sm="6">
-                          <span
-                            className="text-uppercase font-weight-bolder font-effect-shadow-multiple"
-                            style={{ fontSize: "1.5em" }}
-                          >
-                            {account.accountName}
-                          </span>
-                          <br />
-                          Tag :{" "}
-                          <span className="badge badge-pill badge-primary p-2 mt-3">
-                            {account.tag}
-                          </span>
-                        </MDBCol>
-                        <MDBCol md="2" sm="2" className="account-balance">
-                          € {account.closingBalance}
-                        </MDBCol>
-                        <MDBCol md="1" sm="1" className="m-1">
-                          <div className="round-button">
-                            {/* <a  className=" text-light" href={`/accounts/${account._id}`}>open</a> */}
-                            <a  className=" text-light">open</a>
-                          </div>
-                        </MDBCol>
-                      </MDBRow>
-                    </MDBCard>
-                  );
-                })}
+                            <td> {index + 1}</td>
+                            <td> {account.accountName}</td>
+                            <td> {account.tag}</td>
+                            <td>{"€ " + account.closingBalance}</td>
+                            <td>
+                              <span
+                                className=" pointer text-primary fas fa-external-link-alt"
+                                onClick={() =>
+                                  history.push(`/accounts/${account._id}`)
+                                }
+                              ></span>
+                            </td>
+                          </tr>
+                        );
+                      })}
+                      {/* <MDBRow className="w-100 align-items-center ">
+                          <MDBCol md="1" sm="1">
+                              <span
+                                className="font-effect-shadow-multiple"
+                                style={{ fontSize: "30px" }}
+                              >
+                                {index + 1}
+                              </span>
+                            </MDBCol>
+                            <MDBCol md="4" sm="4">
+                              <span
+                                className="text-uppercase font-weight-bolder font-effect-shadow-multiple float-left"
+                                style={{ fontSize: "1.5em" }}
+                              >
+                                {account.accountName}
+                              </span>
+                            </MDBCol>
+                            <MDBCol md="3" sm="3">
+                              <span className="float-left">
+                                Tag :{" "}
+                                <span className="badge badge-pill badge-primary p-2 mt-3">
+                                  {account.tag}
+                                </span>
+                              </span>
+                            </MDBCol>
+                            <MDBCol md="2" sm="2" className="account-balance">
+                              € {account.closingBalance}
+                            </MDBCol>
+                            <MDBCol md="1" sm="1" className="m-1">
+                              <div className="round-button">
+                               
+                             
+                              </div>
+                            </MDBCol>
+                          </MDBRow> */}
+                    </MDBTableBody>
+                  </MDBTable>
+                </MDBCard>
               </div>
             )}
           </MDBContainer>
-          <span  className="d-none" style={{ position: "fixed", right: 50, bottom: 50 }}>
+          <span style={{ position: "fixed", right: 50, bottom: 50 }}>
             <Modal createAccount={this.props.createAccount}></Modal>
           </span>
         </div>

@@ -213,18 +213,17 @@ class Income extends Component {
                   color="primary"
                   onClick={() => this.props.createTransaction(this.state.data)}
                   disabled={
-                    true
-                    // this.state.data.date === "" ||
-                    // this.state.data.descreption === "" ||
-                    // this.state.data.amount === 0 ||
-                    // this.state.data.debitAccount === "" ||
-                    // this.state.data.debitAccount === "*" ||
-                    // this.state.data.creditAccount === "" ||
-                    // this.state.data.creditAccount === "*" ||
-                    // this.state.data.debitAccount ===
-                    //   this.state.data.creditAccount
-                    //   ? true
-                    //   : false
+                    this.state.data.date === "" ||
+                    this.state.data.descreption === "" ||
+                    this.state.data.amount === 0 ||
+                    this.state.data.debitAccount === "" ||
+                    this.state.data.debitAccount === "*" ||
+                    this.state.data.creditAccount === "" ||
+                    this.state.data.creditAccount === "*" ||
+                    this.state.data.debitAccount ===
+                      this.state.data.creditAccount
+                      ? true
+                      : false
                   }
                 >
                   Save changes
@@ -254,7 +253,7 @@ class Income extends Component {
             <select
               className="form-control"
               onchange={e => {
-                console.log(e.target);
+                console.error(e.target);
               }}
               onClick={e => {
                 this.setState({ createAccountInventoryAffect: e.target.value });
@@ -285,13 +284,12 @@ class Income extends Component {
                 this.toggle();
               }}
               disabled={
-                true
-                // this.state.creatAccountAlias === "" ||
-                // this.state.createAccounttag === "" ||
-                // this.state.createAccountName === "" ||
-                // this.state.createAccountInventoryAffect === ""
-                //   ? true
-                //   : false
+                this.state.creatAccountAlias === "" ||
+                this.state.createAccounttag === "" ||
+                this.state.createAccountName === "" ||
+                this.state.createAccountInventoryAffect === ""
+                  ? true
+                  : false
               }
             >
               Save changes

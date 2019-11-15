@@ -14,6 +14,7 @@ import start from "../../assets/start.png";
 import statement from "../../assets/statement.png";
 import account from "../../assets/account.png";
 import transaction from "../../assets/transaction.png";
+import Helmet from "react-helmet"
 
 export default class Dashboard extends Component {
   constructor(props) {

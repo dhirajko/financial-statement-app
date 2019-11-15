@@ -32,7 +32,7 @@ class Statement extends Component {
       <MDBContainer>
         <MDBNav tabs>
           <ul className="nav nav-pills mb-5">
-            <li className="nav-item">
+            <li className="nav-item pointer">
               <span
                 className={
                   this.state.activeItem === "1"
@@ -44,7 +44,7 @@ class Statement extends Component {
                 Trial Balance
               </span>
             </li>
-            <li className="nav-item">
+            <li className="nav-item pointer">
               <span
                 className={
                   this.state.activeItem === "2"
@@ -56,7 +56,7 @@ class Statement extends Component {
                 Profit and Loss
               </span>
             </li>
-            <li className="nav-item">
+            <li className="nav-item pointer">
               <span
                 className={
                   this.state.activeItem === "3"

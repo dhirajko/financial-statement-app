@@ -142,36 +142,36 @@ label {
 }
 
 .account-balance {
-  font-family: "Unica One", cursive;
+  font-family:"Raleway", sans-serif;
   font-size: 20px;
 }
 .account-balance-key {
-  font-family: "Orienta", sans-serif;
+  font-family:"Raleway", sans-serif;
   font-size: 20px;
 }
 .account-balance-values {
-  font-family: 'Yeseva One', cursive;
+  font-family:"Raleway", sans-serif;
   font-size: 20px;
 }
 
 .account-balance-values {
-  font-family: 'Yeseva One', cursive;
+  font-family:"Raleway", sans-serif;
   font-size: 20px;
 }
 .account-tag{
   font-size: 12px;
-  font-family: 'Kreon', serif;
+  font-family:"Raleway", sans-serif;
   color: white;
   background-color: #0B4648;
   border: none;
   border-radius: 25px;
 }
 .account-balance-inventory {
-  font-family: 'Kreon', serif;
+  font-family:"Raleway", sans-serif;
   font-size: 20px;
 }
 .account-balance-description {
-  font-family: 'Chivo', sans-serif;
+  font-family:"Raleway", sans-serif;
   font-size: 20px;
   
 }

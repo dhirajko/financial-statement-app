@@ -10,12 +10,16 @@ import {
 } from "mdbreact";
 import { Formik, Form } from "formik";
 import * as Yup from "yup";
-import {
-  FormikTextField,
-  FormikSelectField,
-  FormikRadioGroupField
-} from "formik-material-fields";
+import { FormikSelectField } from "formik-material-fields";
 import { list } from "../../constants/Tags";
+import {
+  Radio,
+  FormControlLabel,
+  FormControl,
+  RadioGroup,
+  FormLabel,
+  TextField
+} from "@material-ui/core";
 import "../../App.css";
 
 const validationSchema = Yup.object().shape({
@@ -82,30 +86,35 @@ class Modal extends Component {
         <MDBModal isOpen={this.state.modal} toggle={this.toggle}>
           <MDBModalHeader toggle={this.toggle}>Create account</MDBModalHeader>
           <MDBModalBody>
-          {/* validationSchema={validationSchema}> */}
-            <Formik> 
+            {/* validationSchema={validationSchema}> */}
+            <Formik
+              initialValues={this.state}
+              validationSchema={validationSchema}
+              className="container"
+            >
               {({ isValid }) => (
-                <Form autoComplete="off">
-                  <FormikTextField
+                <FormControl autoComplete="off" className="container">
+                  <TextField
                     name="accountName"
-                    label="Account name"
-                    margin="normal"
-                    // onChange={e => this.handleChange(e)}
+                    label={"Account name"}
+                    placeholder="Account name"
+                    className="m-1"
+                    onChange={e => this.handleChange(e)}
                     fullWidth
                   />
-                  <FormikTextField
+                  <TextField
                     name="alias"
                     label="Alias"
-                    margin="normal"
-                    // onChange={e => this.handleChange(e)}
+                    className="m-1"
+                    onChange={e => this.handleChange(e)}
                     fullWidth
                   />
 
                   <FormikSelectField
                     name="tag"
                     label="Tag"
-                    margin="normal"
-                    // onChange={e => this.handleCurrentChange(e)}
+                    className="mt-3"
+                    onChange={e => this.handleCurrentChange(e)}
                     options={this.createOptions(list)}
                     onClick={e => {
                       if (e.target.value === "") {
@@ -115,48 +124,66 @@ class Modal extends Component {
                     fullWidth
                     native
                   />
-                  <FormikRadioGroupField
+
+                  <RadioGroup
+                    aria-label="position"
                     name="inventoryAffects"
+                    className="mt-3"
                     label="Inventory Affected"
-                    margin="normal"
-                    // onChange={e => this.handleRadioChange(e)}
-                    options={[
-                      { label: "No", value: "false" },
-                      { label: "Yes", value: "true" }
-                    ]}
-                    row="all"
-                  />
-                  <FormikTextField
+                    onChange={e => this.handleChange(e)}
+                    row
+                  >
+                    <FormLabel component="legend">Inventory Affected</FormLabel>
+                    <FormControlLabel
+                      value="true"
+                      control={<Radio color="primary" />}
+                      label="Yes"
+                      labelPlacement="start"
+                    />
+                    <FormControlLabel
+                      value="false"
+                      control={<Radio color="primary" />}
+                      label="No"
+                      labelPlacement="start"
+                    />
+                  </RadioGroup>
+
+                  <TextField
                     name="descreption"
                     label="Descreption"
-                    margin="normal"
-                    // onChange={e => this.handleChange(e)}
+                    placeholder="Account description"
+                    onChange={e => this.handleChange(e)}
                     fullWidth
                   />
                   <MDBModalFooter>
-                    <MDBBtn color="secondary" onClick={this.toggle}>
+                    <MDBBtn
+                      color="secondary"
+                      onClick={() => {
+                        console.log(this.state);
+                      }}
+                    >
                       Close
                     </MDBBtn>
                     <MDBBtn
                       color="primary"
                       onClick={() => {
                         this.props.createAccount(this.state.data);
-                        history.push("/account");
+                        this.toggle();
                       }}
-                      disabled={ true
-                        // this.state.data.accountName === "" ||
-                        // this.state.data.tag === "" ||
-                        // this.state.data.alias === "" ||
-                        // this.state.data.inventoryAffects === "" ||
-                        // this.state.data.descreption === ""
-                        //   ? true
-                        //   : false
+                      disabled={
+                        this.state.data.accountName === "" ||
+                        this.state.data.tag === "" ||
+                        this.state.data.alias === "" ||
+                        this.state.data.inventoryAffects === "" ||
+                        this.state.data.descreption === ""
+                          ? true
+                          : false
                       }
                     >
                       Save changes
                     </MDBBtn>
                   </MDBModalFooter>
-                </Form>
+                </FormControl>
               )}
             </Formik>
           </MDBModalBody>

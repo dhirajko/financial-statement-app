@@ -68,7 +68,7 @@ class Sidebar extends React.Component {
                 history.push("/transactions");
               }}
               className={
-                this.props.location.pathname === "/"
+                this.props.location.pathname === "/transactions"
                   ? "sidebar-link"
                   : "sidebar-link-inactive"
               }

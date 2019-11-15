@@ -21,6 +21,7 @@ class AccountsContainer extends Component {
     this.props.actions.fetchAccounts();
   };
 
+ 
   render() {
     return (
       <Accounts

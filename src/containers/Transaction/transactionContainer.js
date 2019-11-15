@@ -10,7 +10,6 @@ class TransactionContainer extends Component {
     this.props.actions.fetchTransactionById(id);
   };
   render() {
-    console.log(this.props);
     return (
       <Transaction
         searchTransaction={this.searchTransaction}

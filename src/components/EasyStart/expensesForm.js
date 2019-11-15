@@ -99,7 +99,6 @@ class Expenses extends Component {
   };
 
   createCurrentAssets = () => {
-    console.log(this.props.accounts, "acc");
     let initial = [
       { label: "", value: "" },
       { label: "CREATE CURRENT ASSETS", value: "*" }
@@ -219,6 +218,7 @@ class Expenses extends Component {
                 label="amount"
                 margin="normal"
                 type="number"
+                value={this.state.data.amount || ""}
                 onChange={e => this.handleChange(e)}
                 fullWidth
               />
@@ -234,18 +234,17 @@ class Expenses extends Component {
                   color="primary"
                   onClick={() => this.props.createTransaction(this.state.data)}
                   disabled={
-                    true
-                    // this.state.data.date === "" ||
-                    // this.state.data.descreption === "" ||
-                    // this.state.data.amount === 0 ||
-                    // this.state.data.debitAccount === "" ||
-                    // this.state.data.debitAccount === "*" ||
-                    // this.state.data.creditAccount === "" ||
-                    // this.state.data.creditAccount === "*" ||
-                    // this.state.data.debitAccount ===
-                    //   this.state.data.creditAccount
-                    //   ? true
-                    //   : false
+                    this.state.data.date === "" ||
+                    this.state.data.descreption === "" ||
+                    this.state.data.amount === 0 ||
+                    this.state.data.debitAccount === "" ||
+                    this.state.data.debitAccount === "*" ||
+                    this.state.data.creditAccount === "" ||
+                    this.state.data.creditAccount === "*" ||
+                    this.state.data.debitAccount ===
+                      this.state.data.creditAccount
+                      ? true
+                      : false
                   }
                 >
                   Save changes
@@ -304,13 +303,13 @@ class Expenses extends Component {
                 this.toggle();
               }}
               disabled={
-                true
-                // this.state.creatAccountAlias === "" ||
-                // this.state.createAccounttag === "" ||
-                // this.state.createAccountName === "" ||
-                // this.state.createAccountInventoryAffect === ""
-                //   ? true
-                //   : false
+              
+                this.state.creatAccountAlias === "" ||
+                this.state.createAccounttag === "" ||
+                this.state.createAccountName === "" ||
+                this.state.createAccountInventoryAffect === ""
+                  ? true
+                  : false
               }
             >
               Save changes

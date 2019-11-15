@@ -1,5 +1,14 @@
 import React, { Component } from "react";
-import { MDBRow, MDBCol, MDBContainer, MDBCard, MDBBtn } from "mdbreact";
+import {
+  MDBTable,
+  MDBTableBody,
+  MDBTableHead,
+  MDBRow,
+  MDBCol,
+  MDBContainer,
+  MDBCard,
+  MDBBtn
+} from "mdbreact";
 import Modal from "./transactionModal";
 
 import moment from "moment";
@@ -14,14 +23,8 @@ export default class Transactions extends Component {
     };
   }
 
-  componentDidMount() {
-    this.props.searchAccounts();
-    this.props.searchTransactions();
-  }
   render() {
-    const transactions = this.props.transactions;
-    console.log(this.props);
-
+    const { accounts, transactions } = this.props;
     return (
       <div id="apppage">
         <div className="dash-page">
@@ -30,77 +33,103 @@ export default class Transactions extends Component {
               <span className="list-page-heading">Transactions</span>
             </div>
             {Object.keys(transactions).length === 0 ? (
-              <MDBRow className="text-center">
-                <MDBCol middle>
-                  <MDBBtn
-                    className="p-3 rounded-circle"
-                    onClick={this.props.searchTransactions}
-                  >
-                    <img src={reload} alt="Not found" height="50"></img>
-                  </MDBBtn>
-                </MDBCol>
-              </MDBRow>
+              this.props.searchTransactions()
             ) : (
               <div>
-                {transactions.map((account, index) => {
-                  return (
-                    <MDBCard className="p-3 text-center  m-3" key={account._id}>
-                      <MDBRow className="w-100 align-items-center ">
-                        <MDBCol md="2" sm="2">
+                {console.log(transactions)}
+                <MDBCard className="p-3 text-center  m-3">
+                  <MDBTable hover>
+                    <MDBTableHead>
+                      <tr>
+                        <th>Date</th>
+                        <th>Debit Account</th>
+                        <th>Credit Account</th>
+                        <th>Amount</th>
+                        <th>Details</th>
+                      </tr>
+                    </MDBTableHead>
+                    <MDBTableBody>
+                      {transactions.map(account => {
+                        return (
+                          <tr key={account._id}>
+                            <td>{moment(account.date).format("Do MMM  YY")}</td>
+                            <td>
+                              <a
+                                className="text-primary"
+                                href={"/accounts/" + account.debitAccount._id}
+                              >
+                                {" "}
+                                {account.debitAccount.accountName + " a/c"}
+                              </a>
+                            </td>
+                            <td>
+                              <a
+                                className="text-primary"
+                                href={"/accounts/" + account.creditAccount._id}
+                              >
+                                {" "}
+                                {account.creditAccount.accountName + " a/c"}
+                              </a>
+                            </td>
+                            <td>€ {account.amount}</td>
+                            <td className="text-left">{account.descreption}</td>
+                          </tr>
+                        );
+                      })}
+                    </MDBTableBody>
+                  </MDBTable>
+                  {/* <MDBRow className="w-100 align-items-center ">
+                    <MDBCol md="2" sm="2">
+                      <span
+                        className="font-effect-shadow-multiple"
+                        style={{ fontSize: "15px" }}
+                      >
+                        Date : {moment(account.date).format("Do MMM  YY")}
+                      </span>
+                    </MDBCol>
+                    <MDBCol md="6" sm="6">
+                      <MDBRow>
+                        <MDBCol xs="12" md="12" className="">
+                          <span className="account-balance-inventory m-4 ">
+                            Debit A/c:{" "}
+                          </span>
                           <span
-                            className="font-effect-shadow-multiple"
-                            style={{ fontSize: "15px" }}
+                            className="text-uppercase font-weight-bolder font-effect-shadow-multiple"
+                            style={{ fontSize: "1.5em" }}
                           >
-                            {moment(account.date).format("DD-MM-YYYY")}
+                            {account.debitAccount.accountName}
                           </span>
                         </MDBCol>
-                        <MDBCol md="6" sm="6">
-                          <MDBRow>
-                            <MDBCol xs="12" md="12" className="">
-                              <span className="account-balance-inventory m-4 ">
-                                Debit A/c:{" "}
-                              </span>
-                              <span
-                                className="text-uppercase font-weight-bolder font-effect-shadow-multiple"
-                                style={{ fontSize: "1.5em" }}
-                              >
-                                {account.debitAccount.accountName}
-                              </span>
-                            </MDBCol>
-                            <MDBCol xs="12" md="12">
-                              <span className="account-balance-inventory m-4 ">
-                                Credit A/c:{" "}
-                              </span>
-                              <span
-                                className="text-uppercase font-weight-bolder font-effect-shadow-multiple"
-                                style={{ fontSize: "1.5em" }}
-                              >
-                                {account.creditAccount.accountName}
-                              </span>
-                            </MDBCol>
-                          </MDBRow>
-                        </MDBCol>
-                        <MDBCol md="2" sm="2" className="account-balance">
-                          € {account.amount}
-                        </MDBCol>
-                        <MDBCol md="1" sm="1" className="m-1">
-                          <div className="round-button">
-                            {/* <a className=" text-light" href={`/transactions/${account._id}`}>open</a> */}
-                            <a className=" text-light">open</a>
-                          </div>
+                        <MDBCol xs="12" md="12">
+                          <span className="account-balance-inventory m-4 ">
+                            Credit A/c:{" "}
+                          </span>
+                          <span
+                            className="text-uppercase font-weight-bolder font-effect-shadow-multiple"
+                            style={{ fontSize: "1.5em" }}
+                          >
+                            {account.creditAccount.accountName}
+                          </span>
                         </MDBCol>
                       </MDBRow>
-                    </MDBCard>
-                  );
-                })}
+                    </MDBCol>
+                    <MDBCol md="2" sm="2" className="account-balance">
+                      € {account.amount}
+                    </MDBCol>
+                  </MDBRow> */}
+                </MDBCard>
               </div>
             )}
           </MDBContainer>
           <span style={{ position: "fixed", right: 50, bottom: 50 }}>
-            <Modal
-              accounts={this.props.accounts}
-              createTransaction={this.props.createTransaction}
-            ></Modal>
+            {accounts && Array.isArray(accounts) && accounts.length === 0 ? (
+              <Modal
+                accounts={this.props.accounts}
+                createTransaction={this.props.createTransaction}
+              ></Modal>
+            ) : (
+              this.props.searchAccounts()
+            )}
           </span>
         </div>
       </div>

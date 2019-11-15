@@ -38,7 +38,7 @@ export const httpBase = () => {
         store.dispatch(http500Error());
         store.dispatch(push("/500"));
       }
-      console.log("TODO");
+
       return Promise.reject(error);
     }
   );
