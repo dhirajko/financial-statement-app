@@ -1,0 +1,10 @@
+
+
+First run react build 
+
+inside build create file with name "_redirect"
+include following command in file
+
+/*	/index.html	200
+
+save and drag file to netlify deployment area.
