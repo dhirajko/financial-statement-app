@@ -52,7 +52,7 @@ export default class Transactions extends Component {
                         return (
                           <tr key={account._id}>
                             <td>{moment(account.date).format("Do MMM  YY")}</td>
-                            <td className="pointer">
+                            <td className="pointer text-primary">
                               <span
                                 onClick={() => {
                                   history.push(
@@ -64,7 +64,7 @@ export default class Transactions extends Component {
                                 {account.debitAccount.accountName + " a/c"}
                               </span>
                             </td>
-                            <td className="pointer">
+                            <td className="pointer text-primary">
                               <span
                                 onClick={() => {
                                   history.push(

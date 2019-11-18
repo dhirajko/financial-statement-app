@@ -58,7 +58,7 @@ export default class Accounts extends Component {
                             key={account._id}
                           >
                             <td> {index + 1}</td>
-                            <td> {account.accountName}</td>
+                            <td className="text-primary"> {account.accountName}</td>
                             <td> {account.tag}</td>
                             <td>{"€ " + account.closingBalance}</td>
                             <td>
