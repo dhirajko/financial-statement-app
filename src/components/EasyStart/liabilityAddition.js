@@ -14,7 +14,7 @@ import {
 import { Formik, Form } from "formik";
 import * as Yup from "yup";
 import { FormikTextField, FormikSelectField } from "formik-material-fields";
-import { income, currentAssets } from "../../constants/Tags";
+import { liability, debitList } from "../../constants/Tags";
 import "react-datepicker/dist/react-datepicker.css";
 import "../../App.css";
 
@@ -28,28 +28,33 @@ const validationSchema = Yup.object().shape({
   descreption: Yup.string().required("*")
 });
 
-class Income extends Component {
-  state = {
-    selectOption: e => this.createAccountListOption(e),
-    modal: false,
-    createAccountName: "",
-    creatAccountAlias: "",
-    createAccounttag: "",
-    createAccountInventoryAffect: "",
-    data: {
-      date: new Date(),
-      debitAccount: "",
-      creditAccount: "",
-      amount: 0,
-      descreption: ""
-    }
-  };
+class AddLiability extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      selectOption: e => this.createAccountListOption(e),
+      modal: false,
+      createAccountName: "",
+      creatAccountAlias: "",
+      createAccounttag: "",
+      createAccountInventoryAffect: "",
+      data: {
+        date: new Date(),
+        debitAccount: "",
+        creditAccount: "",
+        amount: 0,
+        descreption: ""
+      }
+    };
+  }
 
   toggle = () => {
     this.setState({
       createAccountName: "",
       creatAccountAlias: "",
       createAccounttag: "",
+      creditAccount: "",
+      debitAccount: "",
       modal: !this.state.modal
     });
   };
@@ -76,36 +81,37 @@ class Income extends Component {
     });
   };
 
-  createIncome = () => {
-    let inital = [
+  createLiability = () => {
+    let initial = [
       { label: "", value: "" },
-      { label: "CREATE INCOME", value: "*" }
+      { label: "CREATE LIABILITY", value: "*" }
     ];
+
     this.props.accounts.map(account => {
-      if (income.includes(account.tag)) {
-        return inital.push({
+      if (liability.includes(account.tag)) {
+        initial.push({
           label: account.accountName.toUpperCase(),
           value: account._id
         });
       }
     });
-    return inital;
+    return initial;
   };
 
-  createCurrentAssets = () => {
-    let inital = [
+  createDebitList = () => {
+    let initial = [
       { label: "", value: "" },
-      { label: "CREATE CURRENT ASSETS", value: "*" }
+      { label: "CREATE DEBIT LIST", value: "*" }
     ];
     this.props.accounts.map(account => {
-      if (currentAssets.includes(account.tag)) {
-        inital.push({
+      if (debitList.includes(account.tag)) {
+        initial.push({
           label: account.accountName.toUpperCase(),
           value: account._id
         });
       }
     });
-    return inital;
+    return initial;
   };
 
   createAccountListOption = array => {
@@ -118,6 +124,7 @@ class Income extends Component {
             this.setState({ createAccounttag: e.target.value });
           }}
         >
+          <option value=""></option>
           {array.map((option, index) => (
             <option key={index} value={option}>
               {option}
@@ -160,15 +167,21 @@ class Income extends Component {
               />
 
               <FormikSelectField
-                name="debitAccount"
-                label="Did you receive cash / Bank  or other"
+                name="creditAccount"
+                label="What did you take? Loan or liability: "
                 margin="normal"
-                options={this.createCurrentAssets()}
+                options={this.createLiability()}
                 onChange={this.handleCurrentChange}
                 onClick={e => {
-                  if (e.target.value === "*") {
+                  this.setState({
+                    creditAccount: "*"
+                  });
+                  if (
+                    e.target.value === "*" ||
+                    this.state.creditAccount === "*"
+                  ) {
                     this.setState({
-                      selectOption: this.createAccountListOption(currentAssets),
+                      selectOption: this.createAccountListOption(liability),
                       modal: true
                     });
                   }
@@ -176,20 +189,27 @@ class Income extends Component {
                 fullWidth
                 native
               />
+
               <FormikSelectField
-                name="creditAccount"
-                label="Source of Income"
+                name="debitAccount"
+                label="What did you receive ? "
                 margin="normal"
+                options={this.createDebitList()}
                 onChange={this.handleCurrentChange}
                 onClick={e => {
-                  if (e.target.value === "*") {
+                  this.setState({
+                    debitAccount: "*"
+                  });
+                  if (
+                    e.target.value === "*" ||
+                    this.state.debitAccount === "*"
+                  ) {
                     this.setState({
-                      selectOption: this.createAccountListOption(income),
+                      selectOption: this.createAccountListOption(debitList),
                       modal: true
                     });
                   }
                 }}
-                options={this.createIncome()}
                 fullWidth
                 native
               />
@@ -198,6 +218,7 @@ class Income extends Component {
                 label="amount"
                 margin="normal"
                 type="number"
+                value={this.state.data.amount || ""}
                 onChange={e => this.handleChange(e)}
                 fullWidth
               />
@@ -252,19 +273,17 @@ class Income extends Component {
             <label>inventory Affected?</label>
             <select
               className="form-control"
-              onchange={e => {
-                console.error(e.target);
-              }}
-              onClick={e => {
+              onChange={e => {
                 this.setState({ createAccountInventoryAffect: e.target.value });
               }}
             >
-              <option disabled selected></option>
+              <option name="" value=""></option>
               <option name="" value="true">
                 TRUE
               </option>
               <option value="false">FALSE</option>
             </select>
+
             {this.state.selectOption}
           </MDBModalBody>
           <MDBModalFooter>
@@ -301,4 +320,4 @@ class Income extends Component {
   }
 }
 
-export default Income;
+export default AddLiability;

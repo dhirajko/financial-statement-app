@@ -177,8 +177,8 @@ class Expenses extends Component {
                     debitAccount: "*"
                   });
                   if (
-                    this.state.debitAccount === "*" &&
-                    e.target.value === "*"
+                    e.target.value === "*" ||
+                    this.state.debitAccount === "*"
                   ) {
                     this.setState({
                       selectOption: this.createAccountListOption(expenses),
@@ -201,8 +201,8 @@ class Expenses extends Component {
                     creditAccount: "*"
                   });
                   if (
-                    this.state.creditAccount === "*" &&
-                    e.target.value === "*"
+                    e.target.value === "*" ||
+                    this.state.creditAccount === "*"
                   ) {
                     this.setState({
                       selectOption: this.createAccountListOption(currentAssets),
@@ -303,7 +303,6 @@ class Expenses extends Component {
                 this.toggle();
               }}
               disabled={
-              
                 this.state.creatAccountAlias === "" ||
                 this.state.createAccounttag === "" ||
                 this.state.createAccountName === "" ||

@@ -17,8 +17,8 @@ import Toast from "../components/Common/Toast/Toast";
 
 export const fetchAccounts = () => {
   return dispatch => {
+    dispatch(cleanAccount());
     dispatch(accountsFetchRequest());
-
     return fetch("api/accounts")
       .then(response => {
         dispatch(accountsFetchRequestSuccess(response.data.data));

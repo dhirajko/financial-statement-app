@@ -8,9 +8,9 @@ import {
   MDBTableBody,
   MDBTableHead
 } from "mdbreact";
-//import account from "../../mocks/account";
 import Chart from "./chart";
 import moment from "moment";
+import history from "../../utils/history";
 import "../../App.css";
 
 export default class Account extends Component {
@@ -58,24 +58,24 @@ export default class Account extends Component {
                       <MDBTableBody className="td-head">
                         <tr>
                           <td className="td-head">Closing Balance</td>
-                          <td >:</td>
+                          <td>:</td>
                           <td>€ {accountDetail.closingBalance}</td>
                         </tr>
                         <tr>
                           <td className="td-head">Tag</td>
-                          <td >:</td>
+                          <td>:</td>
                           <td>{accountDetail.tag}</td>
                         </tr>
                         <tr>
                           <td className="td-head">Inventory Affected</td>
-                          <td >:</td>
+                          <td>:</td>
                           <td className="text-capitalize">
                             {accountDetail.inventoryAffects.toString()}
                           </td>
                         </tr>
                         <tr>
                           <td className="td-head">Description</td>
-                          <td >:</td>
+                          <td>:</td>
                           <td className="text-capitalize">
                             {accountDetail.descreption}
                           </td>
@@ -96,7 +96,7 @@ export default class Account extends Component {
               <div className="mt-5 text-center">
                 <h3>Related Transactions</h3>
               </div>
-              <MDBCard className="mt-3 mb-5">
+              <MDBCard className="mt-3 mb-3">
                 <MDBTable hover className="px-3">
                   <MDBTableHead>
                     <tr style={{ backgroundColor: "#d6c28b" }}>
@@ -125,15 +125,27 @@ export default class Account extends Component {
                           <td>
                             {account.debitAccount._id ===
                             this.props.match.params.id ? (
-                              <a
-                                href={"/accounts/" + account.creditAccount._id}
+                              <span
+                                onClick={() => {
+                                  history.push(
+                                    "/accounts/" + account.creditAccount._id
+                                  );
+                                }}
                               >
+                                {" "}
                                 {account.creditAccount.accountName}
-                              </a>
+                              </span>
                             ) : (
-                              <a href={"/accounts/" + account.debitAccount._id}>
+                              <span
+                                onClick={() => {
+                                  history.push(
+                                    "/accounts/" + account.debitAccount._id
+                                  );
+                                }}
+                              >
+                                {" "}
                                 {account.debitAccount.accountName}
-                              </a>
+                              </span>
                             )}
                           </td>
                           <td>{account.descreption}</td>

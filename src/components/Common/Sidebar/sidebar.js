@@ -37,9 +37,7 @@ class Sidebar extends React.Component {
               }
             >
               <i className="fa fa-home"></i>{" "}
-              <b style={!sidebarOpen ? { display: "none" } : {}}>
-                Dashboard
-              </b>
+              <b style={!sidebarOpen ? { display: "none" } : {}}>Dashboard</b>
             </span>
           </li>
 
@@ -56,9 +54,7 @@ class Sidebar extends React.Component {
               }
             >
               <i className="fas fa-chart-bar"></i>{" "}
-              <b style={!sidebarOpen ? { display: "none" } : {}}>
-                Accounts
-              </b>
+              <b style={!sidebarOpen ? { display: "none" } : {}}>Accounts</b>
             </span>
           </li>
           <li>
@@ -76,6 +72,23 @@ class Sidebar extends React.Component {
               <i className="fas fa-hand-holding-usd"></i>{" "}
               <b style={!sidebarOpen ? { display: "none" } : {}}>
                 transactions
+              </b>
+            </span>
+          </li>
+          <li>
+            <span
+              onClick={() => {
+                history.push("/statement");
+              }}
+              className={
+                this.props.location.pathname === "/statement"
+                  ? "sidebar-link"
+                  : "sidebar-link-inactive"
+              }
+            >
+              <i className="fas fa-chart-line"></i>{" "}
+              <b style={!sidebarOpen ? { display: "none" } : {}}>
+                Financial Statements
               </b>
             </span>
           </li>

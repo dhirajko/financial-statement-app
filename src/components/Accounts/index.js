@@ -72,41 +72,6 @@ export default class Accounts extends Component {
                           </tr>
                         );
                       })}
-                      {/* <MDBRow className="w-100 align-items-center ">
-                          <MDBCol md="1" sm="1">
-                              <span
-                                className="font-effect-shadow-multiple"
-                                style={{ fontSize: "30px" }}
-                              >
-                                {index + 1}
-                              </span>
-                            </MDBCol>
-                            <MDBCol md="4" sm="4">
-                              <span
-                                className="text-uppercase font-weight-bolder font-effect-shadow-multiple float-left"
-                                style={{ fontSize: "1.5em" }}
-                              >
-                                {account.accountName}
-                              </span>
-                            </MDBCol>
-                            <MDBCol md="3" sm="3">
-                              <span className="float-left">
-                                Tag :{" "}
-                                <span className="badge badge-pill badge-primary p-2 mt-3">
-                                  {account.tag}
-                                </span>
-                              </span>
-                            </MDBCol>
-                            <MDBCol md="2" sm="2" className="account-balance">
-                              € {account.closingBalance}
-                            </MDBCol>
-                            <MDBCol md="1" sm="1" className="m-1">
-                              <div className="round-button">
-                               
-                             
-                              </div>
-                            </MDBCol>
-                          </MDBRow> */}
                     </MDBTableBody>
                   </MDBTable>
                 </MDBCard>

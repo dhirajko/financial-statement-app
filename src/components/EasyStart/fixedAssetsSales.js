@@ -14,7 +14,7 @@ import {
 import { Formik, Form } from "formik";
 import * as Yup from "yup";
 import { FormikTextField, FormikSelectField } from "formik-material-fields";
-import { income, currentAssets } from "../../constants/Tags";
+import { fixedAssets, currentAssets } from "../../constants/Tags";
 import "react-datepicker/dist/react-datepicker.css";
 import "../../App.css";
 
@@ -28,28 +28,33 @@ const validationSchema = Yup.object().shape({
   descreption: Yup.string().required("*")
 });
 
-class Income extends Component {
-  state = {
-    selectOption: e => this.createAccountListOption(e),
-    modal: false,
-    createAccountName: "",
-    creatAccountAlias: "",
-    createAccounttag: "",
-    createAccountInventoryAffect: "",
-    data: {
-      date: new Date(),
-      debitAccount: "",
-      creditAccount: "",
-      amount: 0,
-      descreption: ""
-    }
-  };
+class FixedPurchaseSales extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      selectOption: e => this.createAccountListOption(e),
+      modal: false,
+      createAccountName: "",
+      creatAccountAlias: "",
+      createAccounttag: "",
+      createAccountInventoryAffect: "",
+      data: {
+        date: new Date(),
+        debitAccount: "",
+        creditAccount: "",
+        amount: 0,
+        descreption: ""
+      }
+    };
+  }
 
   toggle = () => {
     this.setState({
       createAccountName: "",
       creatAccountAlias: "",
       createAccounttag: "",
+      creditAccount: "",
+      debitAccount: "",
       modal: !this.state.modal
     });
   };
@@ -76,36 +81,34 @@ class Income extends Component {
     });
   };
 
-  createIncome = () => {
-    let inital = [
-      { label: "", value: "" },
-      { label: "CREATE INCOME", value: "*" }
-    ];
+  createFixedAsset = () => {
+    let initial = [{ label: "", value: "" }];
+
     this.props.accounts.map(account => {
-      if (income.includes(account.tag)) {
-        return inital.push({
+      if (fixedAssets.includes(account.tag)) {
+        initial.push({
           label: account.accountName.toUpperCase(),
           value: account._id
         });
       }
     });
-    return inital;
+    return initial;
   };
 
   createCurrentAssets = () => {
-    let inital = [
+    let initial = [
       { label: "", value: "" },
       { label: "CREATE CURRENT ASSETS", value: "*" }
     ];
     this.props.accounts.map(account => {
       if (currentAssets.includes(account.tag)) {
-        inital.push({
+        initial.push({
           label: account.accountName.toUpperCase(),
           value: account._id
         });
       }
     });
-    return inital;
+    return initial;
   };
 
   createAccountListOption = array => {
@@ -118,6 +121,7 @@ class Income extends Component {
             this.setState({ createAccounttag: e.target.value });
           }}
         >
+          <option value=""></option>
           {array.map((option, index) => (
             <option key={index} value={option}>
               {option}
@@ -160,13 +164,42 @@ class Income extends Component {
               />
 
               <FormikSelectField
+                name="creditAccount"
+                label="What did you sale? "
+                margin="normal"
+                options={this.createFixedAsset()}
+                onChange={this.handleCurrentChange}
+                onClick={e => {
+                  this.setState({
+                    debitAccount: "*"
+                  });
+                  if (
+                    e.target.value === "*" ||
+                    this.state.debitAccount === "*"
+                  ) {
+                    this.setState({
+                      selectOption: this.createAccountListOption(fixedAssets),
+                      modal: true
+                    });
+                  }
+                }}
+                fullWidth
+                native
+              />
+              <FormikSelectField
                 name="debitAccount"
-                label="Did you receive cash / Bank  or other"
+                label="What did you receive? "
                 margin="normal"
                 options={this.createCurrentAssets()}
                 onChange={this.handleCurrentChange}
                 onClick={e => {
-                  if (e.target.value === "*") {
+                  this.setState({
+                    creditAccount: "*"
+                  });
+                  if (
+                    e.target.value === "*" ||
+                    this.state.creditAccount === "*"
+                  ) {
                     this.setState({
                       selectOption: this.createAccountListOption(currentAssets),
                       modal: true
@@ -176,28 +209,12 @@ class Income extends Component {
                 fullWidth
                 native
               />
-              <FormikSelectField
-                name="creditAccount"
-                label="Source of Income"
-                margin="normal"
-                onChange={this.handleCurrentChange}
-                onClick={e => {
-                  if (e.target.value === "*") {
-                    this.setState({
-                      selectOption: this.createAccountListOption(income),
-                      modal: true
-                    });
-                  }
-                }}
-                options={this.createIncome()}
-                fullWidth
-                native
-              />
               <FormikTextField
                 name="amount"
                 label="amount"
                 margin="normal"
                 type="number"
+                value={this.state.data.amount || ""}
                 onChange={e => this.handleChange(e)}
                 fullWidth
               />
@@ -252,19 +269,17 @@ class Income extends Component {
             <label>inventory Affected?</label>
             <select
               className="form-control"
-              onchange={e => {
-                console.error(e.target);
-              }}
-              onClick={e => {
+              defaultValue="false"
+              onChange={e => {
                 this.setState({ createAccountInventoryAffect: e.target.value });
               }}
             >
-              <option disabled selected></option>
               <option name="" value="true">
                 TRUE
               </option>
               <option value="false">FALSE</option>
             </select>
+
             {this.state.selectOption}
           </MDBModalBody>
           <MDBModalFooter>
@@ -301,4 +316,4 @@ class Income extends Component {
   }
 }
 
-export default Income;
+export default FixedPurchaseSales;

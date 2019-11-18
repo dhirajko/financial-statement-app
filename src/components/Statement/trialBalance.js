@@ -1,6 +1,15 @@
 import React, { Component } from "react";
-import { MDBRow, MDBCol, MDBContainer, MDBCard } from "mdbreact";
+import {
+  MDBRow,
+  MDBCol,
+  MDBContainer,
+  MDBCard,
+  MDBTable,
+  MDBTableBody
+} from "mdbreact";
 import "../../App.css";
+import history from "../../utils/history";
+
 
 export default class TrialBalance extends Component {
   constructor(props) {
@@ -33,91 +42,136 @@ export default class TrialBalance extends Component {
         <div className="dash-page">
           {this.props.tab === "1" ? (
             <MDBContainer id="page-wrap" className="text-center">
-              <MDBCard
-                className="w-85 text-center text-uppercase font-weight-bolder font-effect-shadow-multiple p-3"
-                style={{ fontSize: "1.5em" }}
-              >
-                Trial Balance
-              </MDBCard>
-
+              <h3 className="font-weight-bold mt-3">Trial Balance</h3>{" "}
               <MDBRow className="mt-2 d-flex justify-content-around">
-                <MDBCol sm="12" lg="6" className="p-2 ">
-                  <span className="statement-heading">Debit</span>
-
-                  {debit.map((account, index) => (
-                    <MDBCard className="p-1  m-1" key={index}>
-                      {" "}
-                      <MDBRow className="m-2">
-                        <MDBCol md="8" className="text-left text-uppercase">
-                          {account.accountName}
-                        </MDBCol>
-                        <MDBCol md="4">{account.closingBalance}</MDBCol>
-                      </MDBRow>
-                    </MDBCard>
-                  ))}
+                <MDBCol sm="12" lg="6" className="p-4">
+                  <span className="statement-heading font-weight-bold">
+                    Debit
+                  </span>
+                  <hr />
+                  <MDBTable borderless>
+                    <MDBTableBody>
+                      {debit.map((account, index) => (
+                        <tr key={index}>
+                          <td className="float-left">
+                            <span
+                              className="text-primary pointer"
+                              onClick={() =>
+                                history.push("/accounts/" + account.id)
+                              }
+                            >
+                              {" "}
+                              {account.accountName.toUpperCase()}
+                            </span>
+                          </td>
+                          <td className="float-right">
+                            {account.closingBalance}
+                          </td>
+                        </tr>
+                      ))}
+                    </MDBTableBody>
+                  </MDBTable>
                 </MDBCol>
                 <MDBCol
                   sm="12"
                   lg="6"
-                  className={changePadding ? "p-2 m-2" : "d-none "}
+                  className={
+                    changePadding ? "p-4 m-2 statement-heading" : "d-none "
+                  }
                 >
-                  <div>
-                    <MDBCard className="p-1  m-1 statement-heading">
-                      <MDBRow className="m-2">
-                        <MDBCol md="8" className="text-left ">
-                          <span className="">Total</span>
-                        </MDBCol>
-                        <MDBCol md="4">{creditTotal}</MDBCol>
-                      </MDBRow>
-                    </MDBCard>
-                  </div>
+                  <hr />
+                  <MDBTable borderless>
+                    <MDBTableBody>
+                      <tr>
+                        <td className="float-left">
+                          <span className="statement-heading font-weight-bold">
+                            TOTAL
+                          </span>
+                        </td>
+                        <td className="float-right">
+                          {" "}
+                          <span className="statement-heading font-weight-bold">
+                            {debitTotal}
+                          </span>
+                        </td>
+                      </tr>
+                    </MDBTableBody>
+                  </MDBTable>
+                  <hr />
                 </MDBCol>
-                <MDBCol sm="12" lg="6" className="p-2 ">
-                  <span className="statement-heading">Credit</span>
 
-                  <div>
-                    {credit.map((account, index) => (
-                      <MDBCard className="p-1  m-1" key={index}>
-                        {" "}
-                        <MDBRow className="m-2">
-                          <MDBCol md="8" className="text-left text-uppercase">
-                            {account.accountName}
-                          </MDBCol>
-                          <MDBCol md="4">{account.closingBalance}</MDBCol>
-                        </MDBRow>
-                      </MDBCard>
-                    ))}
-                  </div>
+                <MDBCol sm="12" lg="6" className="p-4">
+                  <span className="statement-heading font-weight-bold">
+                    Credit
+                  </span>
+                  <hr />
+                  <MDBTable borderless>
+                    <MDBTableBody>
+                      {credit.map((account, index) => (
+                        <tr key={index}>
+                          <td className="float-left">
+                            <span
+                              className="text-primary pointer"
+                              onClick={() =>
+                                history.push("/accounts/" + account.id)
+                              }
+                            >
+                              {" "}
+                              {account.accountName.toUpperCase()}
+                            </span>
+                          </td>
+                          <td className="float-right">
+                            {account.closingBalance}
+                          </td>
+                        </tr>
+                      ))}
+                    </MDBTableBody>
+                  </MDBTable>
                 </MDBCol>
               </MDBRow>
               <MDBRow className="mt-2 text-center">
-                <MDBCol sm="12" lg="6" className="p-2">
-                  <div>
-                    <MDBCard className="p-1  m-1 statement-heading">
-                      <MDBRow className="m-2">
-                        <MDBCol md="8" className="text-left">
-                          Total
-                        </MDBCol>
-                        <MDBCol md="4">{debitTotal}</MDBCol>
-                      </MDBRow>
-                    </MDBCard>
-                  </div>
+                <MDBCol sm="12" lg="6" className="p-4">
+                  <hr />
+                  <MDBTable borderless>
+                    <MDBTableBody>
+                      <tr>
+                        <td className="float-left">
+                          <span className="statement-heading font-weight-bold">
+                            TOTAL
+                          </span>
+                        </td>
+                        <td className="float-right font-weight-bold">
+                          {debitTotal}
+                        </td>
+                      </tr>
+                    </MDBTableBody>
+                  </MDBTable>
+                  <hr />
                 </MDBCol>
                 <MDBCol
                   sm="12"
                   lg="6"
-                  className={changePadding ? "d-none" : "p-2"}
+                  className={changePadding ? "d-none" : "p-4"}
                 >
-                  <div>
-                    <MDBCard className="p-1  m-1 statement-heading">
-                      <MDBRow className="m-2">
-                        <MDBCol md="8" className="text-left">
-                          Total
-                        </MDBCol>
-                        <MDBCol md="4">{creditTotal}</MDBCol>
-                      </MDBRow>
-                    </MDBCard>
-                  </div>
+                  <hr />
+                  <MDBTable borderless>
+                    <MDBTableBody>
+                      <tr>
+                        <td className="float-left">
+                          <span className="statement-heading font-weight-bold">
+                            TOTAL
+                          </span>
+                        </td>
+                        <td className="float-right">
+                          {" "}
+                          <span className="statement-heading font-weight-bold">
+                            {creditTotal}
+                          </span>
+                        </td>
+                      </tr>
+                    </MDBTableBody>
+                  </MDBTable>
+                  <hr />
                 </MDBCol>
               </MDBRow>
             </MDBContainer>

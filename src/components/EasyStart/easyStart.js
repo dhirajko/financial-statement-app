@@ -11,6 +11,10 @@ import {
 import CapitalForm from "./capitaForm";
 import Expenses from "./expensesForm";
 import Income from "./incomeForm";
+import FixedPurchaseAssets from "./fixedAssetsPurchase";
+import FixedPurchaseSales from "./fixedAssetsSales";
+import AddLiability from "./liabilityAddition";
+import LiabilitySettelment from "./liabilitySettelment";
 
 export default class EasyStart extends Component {
   constructor(props) {
@@ -38,11 +42,10 @@ export default class EasyStart extends Component {
 
   updateAcccountList = () => {
     this.props.searchAccounts();
-   
   };
 
   render() {
-    const {accounts} = this.props;
+    const { accounts } = this.props;
 
     return (
       <div id="apppage">
@@ -141,7 +144,7 @@ export default class EasyStart extends Component {
                 </MDBRow>
               </MDBCardBody>
             </MDBCard>
-            <MDBCard className="w-100">
+            <MDBCard className="w-100  mb-1">
               <MDBCardBody className="">
                 <MDBRow>
                   <MDBCol md="10">
@@ -182,6 +185,202 @@ export default class EasyStart extends Component {
                       <i
                         color="primary"
                         onClick={this.toggleCollapse("3")}
+                        className="fas fa-chevron-down "
+                        style={{ fontSize: 30 }}
+                      ></i>
+                    )}
+                  </MDBCol>
+                </MDBRow>
+              </MDBCardBody>
+            </MDBCard>
+            <MDBCard className="w-100 mb-1">
+              <MDBCardBody className="">
+                <MDBRow>
+                  <MDBCol md="10">
+                    <MDBCardTitle
+                      className="text-center text-uppercase align-bottom"
+                      style={{ fontSize: "15px" }}
+                    >
+                      Purchase Fixed Assets
+                    </MDBCardTitle>
+
+                    <MDBCollapse
+                      id="4"
+                      isOpen={this.state.collapseID}
+                      className="px-4"
+                    >
+                      <FixedPurchaseAssets
+                        accounts={accounts}
+                        searchAccounts={this.props.searchAccounts}
+                        createAccount={this.props.createAccount}
+                        createTransaction={this.props.createTransaction}
+                        updateList={this.updateAcccountList}
+                      />
+                    </MDBCollapse>
+                  </MDBCol>
+                  <MDBCol className=" text-center">
+                    {this.state.collapseID === "4" ? (
+                      <i
+                        color="primary"
+                        onClick={this.toggleCollapse("")}
+                        style={{
+                          fontSize: 30,
+                          position: "absolute",
+                          bottom: 3
+                        }}
+                        className="fas fa-chevron-up "
+                      ></i>
+                    ) : (
+                      <i
+                        color="primary"
+                        onClick={this.toggleCollapse("4")}
+                        className="fas fa-chevron-down "
+                        style={{ fontSize: 30 }}
+                      ></i>
+                    )}
+                  </MDBCol>
+                </MDBRow>
+              </MDBCardBody>
+            </MDBCard>
+            <MDBCard className="w-100 mb-1">
+              <MDBCardBody className="">
+                <MDBRow>
+                  <MDBCol md="10">
+                    <MDBCardTitle
+                      className="text-center text-uppercase align-bottom"
+                      style={{ fontSize: "15px" }}
+                    >
+                      Sale Fixed Assets
+                    </MDBCardTitle>
+
+                    <MDBCollapse
+                      id="5"
+                      isOpen={this.state.collapseID}
+                      className="px-4"
+                    >
+                      <FixedPurchaseSales
+                        accounts={accounts}
+                        searchAccounts={this.props.searchAccounts}
+                        createAccount={this.props.createAccount}
+                        createTransaction={this.props.createTransaction}
+                        updateList={this.updateAcccountList}
+                      />
+                    </MDBCollapse>
+                  </MDBCol>
+                  <MDBCol className=" text-center">
+                    {this.state.collapseID === "5" ? (
+                      <i
+                        color="primary"
+                        onClick={this.toggleCollapse("")}
+                        style={{
+                          fontSize: 30,
+                          position: "absolute",
+                          bottom: 3
+                        }}
+                        className="fas fa-chevron-up "
+                      ></i>
+                    ) : (
+                      <i
+                        color="primary"
+                        onClick={this.toggleCollapse("5")}
+                        className="fas fa-chevron-down "
+                        style={{ fontSize: 30 }}
+                      ></i>
+                    )}
+                  </MDBCol>
+                </MDBRow>
+              </MDBCardBody>
+            </MDBCard>
+            <MDBCard className="w-100 mb-1">
+              <MDBCardBody className="">
+                <MDBRow>
+                  <MDBCol md="10">
+                    <MDBCardTitle
+                      className="text-center text-uppercase align-bottom"
+                      style={{ fontSize: "15px" }}
+                    >
+                      TAKE LOAN or Liability
+                    </MDBCardTitle>
+
+                    <MDBCollapse
+                      id="6"
+                      isOpen={this.state.collapseID}
+                      className="px-4"
+                    >
+                      <AddLiability
+                        accounts={accounts}
+                        searchAccounts={this.props.searchAccounts}
+                        createAccount={this.props.createAccount}
+                        createTransaction={this.props.createTransaction}
+                        updateList={this.updateAcccountList}
+                      />
+                    </MDBCollapse>
+                  </MDBCol>
+                  <MDBCol className=" text-center">
+                    {this.state.collapseID === "6" ? (
+                      <i
+                        color="primary"
+                        onClick={this.toggleCollapse("")}
+                        style={{
+                          fontSize: 30,
+                          position: "absolute",
+                          bottom: 3
+                        }}
+                        className="fas fa-chevron-up "
+                      ></i>
+                    ) : (
+                      <i
+                        color="primary"
+                        onClick={this.toggleCollapse("6")}
+                        className="fas fa-chevron-down "
+                        style={{ fontSize: 30 }}
+                      ></i>
+                    )}
+                  </MDBCol>
+                </MDBRow>
+              </MDBCardBody>
+            </MDBCard>
+            <MDBCard className="w-100 mb-1">
+              <MDBCardBody className="">
+                <MDBRow>
+                  <MDBCol md="10">
+                    <MDBCardTitle
+                      className="text-center text-uppercase align-bottom"
+                      style={{ fontSize: "15px" }}
+                    >
+                      SETTEL LOAN OR LIABILITY
+                    </MDBCardTitle>
+
+                    <MDBCollapse
+                      id="7"
+                      isOpen={this.state.collapseID}
+                      className="px-4"
+                    >
+                      <LiabilitySettelment
+                        accounts={accounts}
+                        searchAccounts={this.props.searchAccounts}
+                        createAccount={this.props.createAccount}
+                        createTransaction={this.props.createTransaction}
+                        updateList={this.updateAcccountList}
+                      />
+                    </MDBCollapse>
+                  </MDBCol>
+                  <MDBCol className=" text-center">
+                    {this.state.collapseID === "7" ? (
+                      <i
+                        color="primary"
+                        onClick={this.toggleCollapse("")}
+                        style={{
+                          fontSize: 30,
+                          position: "absolute",
+                          bottom: 3
+                        }}
+                        className="fas fa-chevron-up "
+                      ></i>
+                    ) : (
+                      <i
+                        color="primary"
+                        onClick={this.toggleCollapse("7")}
                         className="fas fa-chevron-down "
                         style={{ fontSize: 30 }}
                       ></i>

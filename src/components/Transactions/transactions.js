@@ -12,7 +12,7 @@ import {
 import Modal from "./transactionModal";
 
 import moment from "moment";
-import reload from "../../assets/reload.png";
+import history from "../../utils/history";
 import "../../App.css";
 
 export default class Transactions extends Component {
@@ -36,7 +36,6 @@ export default class Transactions extends Component {
               this.props.searchTransactions()
             ) : (
               <div>
-                {console.log(transactions)}
                 <MDBCard className="p-3 text-center  m-3">
                   <MDBTable hover>
                     <MDBTableHead>
@@ -53,23 +52,29 @@ export default class Transactions extends Component {
                         return (
                           <tr key={account._id}>
                             <td>{moment(account.date).format("Do MMM  YY")}</td>
-                            <td>
-                              <a
-                                className="text-primary"
-                                href={"/accounts/" + account.debitAccount._id}
+                            <td className="pointer">
+                              <span
+                                onClick={() => {
+                                  history.push(
+                                    "/accounts/" + account.debitAccount._id
+                                  );
+                                }}
                               >
                                 {" "}
                                 {account.debitAccount.accountName + " a/c"}
-                              </a>
+                              </span>
                             </td>
-                            <td>
-                              <a
-                                className="text-primary"
-                                href={"/accounts/" + account.creditAccount._id}
+                            <td className="pointer">
+                              <span
+                                onClick={() => {
+                                  history.push(
+                                    "/accounts/" + account.creditAccount._id
+                                  );
+                                }}
                               >
                                 {" "}
                                 {account.creditAccount.accountName + " a/c"}
-                              </a>
+                              </span>
                             </td>
                             <td>€ {account.amount}</td>
                             <td className="text-left">{account.descreption}</td>
@@ -78,45 +83,6 @@ export default class Transactions extends Component {
                       })}
                     </MDBTableBody>
                   </MDBTable>
-                  {/* <MDBRow className="w-100 align-items-center ">
-                    <MDBCol md="2" sm="2">
-                      <span
-                        className="font-effect-shadow-multiple"
-                        style={{ fontSize: "15px" }}
-                      >
-                        Date : {moment(account.date).format("Do MMM  YY")}
-                      </span>
-                    </MDBCol>
-                    <MDBCol md="6" sm="6">
-                      <MDBRow>
-                        <MDBCol xs="12" md="12" className="">
-                          <span className="account-balance-inventory m-4 ">
-                            Debit A/c:{" "}
-                          </span>
-                          <span
-                            className="text-uppercase font-weight-bolder font-effect-shadow-multiple"
-                            style={{ fontSize: "1.5em" }}
-                          >
-                            {account.debitAccount.accountName}
-                          </span>
-                        </MDBCol>
-                        <MDBCol xs="12" md="12">
-                          <span className="account-balance-inventory m-4 ">
-                            Credit A/c:{" "}
-                          </span>
-                          <span
-                            className="text-uppercase font-weight-bolder font-effect-shadow-multiple"
-                            style={{ fontSize: "1.5em" }}
-                          >
-                            {account.creditAccount.accountName}
-                          </span>
-                        </MDBCol>
-                      </MDBRow>
-                    </MDBCol>
-                    <MDBCol md="2" sm="2" className="account-balance">
-                      € {account.amount}
-                    </MDBCol>
-                  </MDBRow> */}
                 </MDBCard>
               </div>
             )}

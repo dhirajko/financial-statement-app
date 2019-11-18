@@ -1,7 +1,7 @@
 import React, { Component } from "react";
-import { MDBRow, MDBCol, MDBContainer, MDBCard } from "mdbreact";
+import { MDBRow, MDBCol, MDBContainer, MDBTable, MDBTableBody } from "mdbreact";
 import "../../App.css";
-
+import history from "../../utils/history";
 
 export default class BalanceSheet extends Component {
   constructor(props) {
@@ -45,115 +45,220 @@ export default class BalanceSheet extends Component {
         <div className="dash-page">
           {this.props.tab === "3" ? (
             <MDBContainer id="page-wrap" className="text-center">
-              <MDBCard
-                className="w-85 text-center text-uppercase font-weight-bolder font-effect-shadow-multiple p-3"
-                style={{ fontSize: "1.5em" }}
-              >
-                Balance Sheet
-              </MDBCard>
-
+              <h3 className="font-weight-bold mt-3">Balance Sheet</h3>{" "}
               <MDBRow className="mt-2 d-flex justify-content-around">
-                <MDBCol sm="12" lg="6" className="p-2">
-                  <span className="statement-heading">
+                <MDBCol sm="12" lg="6" className="p-4">
+                  <span className="statement-heading font-weight-bold">
                     Capital and Liability
                   </span>
-                  {capital.map((account, index) => (
-                    <MDBCard className="p-1  m-1" key={index}>
-                      {" "}
-                      <MDBRow className="m-2">
-                        <MDBCol md="8" className="text-left text-uppercase">
-                          {account.accountName}
-                        </MDBCol>
-                        <MDBCol md="4">{account.closingBalance}</MDBCol>
-                      </MDBRow>
-                    </MDBCard>
-                  ))}
-                  <MDBCard className="p-1  m-1">
-                    <MDBRow className="m-2">
-                      <MDBCol md="8" className="text-left">
-                        {pl.status}
-                      </MDBCol>
-                      <MDBCol md="4">{pl.amount}</MDBCol>
-                    </MDBRow>
-                  </MDBCard>
-                  {liability.map((account, index) => (
-                    <MDBCard className="p-1  m-1" key={index}>
-                      <MDBRow className="m-2">
-                        <MDBCol md="8" className="text-left text-uppercase">
-                          {account.accountName}
-                        </MDBCol>
-                        <MDBCol md="4">{account.closingBalance}</MDBCol>
-                      </MDBRow>
-                    </MDBCard>
-                  ))}
-                </MDBCol>
-                <MDBCol sm="12" lg="6" className="p-2 ">
-                  <span className="statement-heading">Assets</span>
-
-                  <div>
-                    {fixedAssets.map((account, index) => (
-                      <MDBCard className="p-1  m-1" key={index}>
-                        {" "}
-                        <MDBRow className="m-2">
-                          <MDBCol md="8" className="text-left text-uppercase">
-                            {account.accountName}
-                          </MDBCol>
-                          <MDBCol md="4">{account.closingBalance}</MDBCol>
-                        </MDBRow>
-                      </MDBCard>
-                    ))}
-
-                    {currentAssets.map((account, index) => (
-                      <MDBCard className="p-1  m-1" key={index}>
-                        <MDBRow className="m-2">
-                          <MDBCol md="8" className="text-left text-uppercase">
-                            {account.accountName}
-                          </MDBCol>
-                          <MDBCol md="4">{account.closingBalance}</MDBCol>
-                        </MDBRow>
-                      </MDBCard>
-                    ))}
-                  </div>
-                </MDBCol>
-              </MDBRow>
-              <MDBRow className="mt-2 text-center">
-                <MDBCol sm="12" lg="6" className="p-2">
-                  <div>
-                    <MDBCard className="p-1  m-1 statement-heading">
-                      <MDBRow className="m-2">
-                        <MDBCol md="8" className="text-left">
-                          <span className="">Total</span>
-                        </MDBCol>
-                        <MDBCol md="4">
-                          {capitalTotal + liabilityTotal + pl.amount >
-                          currentAssetsTotal + fixedAssetsTotal
-                            ? capitalTotal + liabilityTotal + pl.amount
-                            : currentAssetsTotal + fixedAssetsTotal}
-                        </MDBCol>
-                      </MDBRow>
-                    </MDBCard>
-                  </div>
+                  <hr />
+                  <MDBTable borderless>
+                    <MDBTableBody>
+                      {capital.map((account, index) => (
+                        <tr key={index}>
+                          <td className="float-left">
+                            <span
+                              className="text-primary pointer"
+                              onClick={() =>
+                                history.push("/accounts/" + account.id)
+                              }
+                            >
+                              {" "}
+                              {account.accountName.toUpperCase()}
+                            </span>
+                          </td>
+                          <td className="float-right">
+                            {account.closingBalance}
+                          </td>
+                        </tr>
+                      ))}
+                      <tr>
+                        <td className="float-left">
+                          {" "}
+                          {pl.status.toUpperCase()}
+                        </td>
+                        <td className="float-right">{pl.amount}</td>
+                      </tr>
+                      {liability.map((account, index) => (
+                        <tr key={index}>
+                          <td className="float-left">
+                            <span
+                              className="text-primary pointer"
+                              onClick={() =>
+                                history.push("/accounts/" + account.id)
+                              }
+                            >
+                              {" "}
+                              {account.accountName.toUpperCase()}
+                            </span>
+                          </td>
+                          <td className="float-right">
+                            {account.closingBalance}
+                          </td>
+                        </tr>
+                      ))}
+                    </MDBTableBody>
+                  </MDBTable>
                 </MDBCol>
                 <MDBCol
                   sm="12"
                   lg="6"
-                  className={changePadding ? "d-none" : "p-2"}
+                  className={
+                    changePadding ? "p-4 m-2 statement-heading" : "d-none "
+                  }
                 >
-                  <div>
-                    <MDBCard className="p-1  m-1 statement-heading">
-                      <MDBRow className="m-2">
-                        <MDBCol md="8" className="text-left">
-                          Total
-                        </MDBCol>
-                        <MDBCol md="4">
-                          {capitalTotal + liabilityTotal + pl.amount >
-                          currentAssetsTotal + fixedAssetsTotal
-                            ? capitalTotal + liabilityTotal + pl.amount
-                            : currentAssetsTotal + fixedAssetsTotal}
-                        </MDBCol>
-                      </MDBRow>
-                    </MDBCard>
-                  </div>
+                  <hr />
+                  <MDBTable borderless>
+                    <MDBTableBody>
+                      <tr>
+                        <td className="float-left">
+                          <span className="statement-heading font-weight-bold">
+                            TOTAL
+                          </span>
+                        </td>
+                        <td className="float-right">
+                          {" "}
+                          <span className="statement-heading font-weight-bold">
+                            {capitalTotal + liabilityTotal + pl.amount >
+                            currentAssetsTotal + fixedAssetsTotal
+                              ? capitalTotal + liabilityTotal + pl.amount
+                              : currentAssetsTotal + fixedAssetsTotal}
+                          </span>
+                        </td>
+                      </tr>
+                    </MDBTableBody>
+                  </MDBTable>
+                  <hr />
+                </MDBCol>
+
+                <MDBCol sm="12" lg="6" className="p-4">
+                  <span className="statement-heading font-weight-bold">
+                    Assets
+                  </span>
+                  <hr />
+                  <MDBTable borderless>
+                    <MDBTableBody>
+                      {fixedAssets.map((account, index) => (
+                        <tr key={index}>
+                          <td className="float-left">
+                            <span
+                              className="text-primary pointer"
+                              onClick={() =>
+                                history.push("/accounts/" + account.id)
+                              }
+                            >
+                              {" "}
+                              {account.accountName.toUpperCase()}
+                            </span>
+                          </td>
+                          <td className="float-right">
+                            {account.closingBalance}
+                          </td>
+                        </tr>
+                      ))}
+
+                      {currentAssets.map((account, index) => (
+                        <tr key={index}>
+                          <td className="float-left">
+                            <span
+                              className="text-primary pointer"
+                              onClick={() =>
+                                history.push("/accounts/" + account.id)
+                              }
+                            >
+                              {" "}
+                              {account.accountName.toUpperCase()}
+                            </span>
+                          </td>
+                          <td className="float-right">
+                            {account.closingBalance}
+                          </td>
+                        </tr>
+                      ))}
+                    </MDBTableBody>
+                  </MDBTable>
+                </MDBCol>
+                <MDBCol
+                  sm="12"
+                  lg="6"
+                  className={
+                    changePadding ? "p-4 m-2 statement-heading" : "d-none "
+                  }
+                >
+                  <hr />
+                  <MDBTable borderless>
+                    <MDBTableBody>
+                      <tr>
+                        <td className="float-left">
+                          <span className="statement-heading font-weight-bold">
+                            TOTAL
+                          </span>
+                        </td>
+                        <td className="float-right">
+                          {" "}
+                          <span className="statement-heading font-weight-bold">
+                            {capitalTotal + liabilityTotal + pl.amount >
+                            currentAssetsTotal + fixedAssetsTotal
+                              ? capitalTotal + liabilityTotal + pl.amount
+                              : currentAssetsTotal + fixedAssetsTotal}
+                          </span>
+                        </td>
+                      </tr>
+                    </MDBTableBody>
+                  </MDBTable>
+                  <hr />
+                </MDBCol>
+              </MDBRow>
+              <MDBRow
+                className={
+                  changePadding ? "d-none" : " text-center statement-heading"
+                }
+              >
+                <MDBCol sm="12" lg="6" className="px-4">
+                  <hr />
+                  <MDBTable borderless>
+                    <MDBTableBody>
+                      <tr>
+                        <td className="float-left">
+                          <span className="statement-heading font-weight-bold">
+                            TOTAL
+                          </span>
+                        </td>
+                        <td className="float-right">
+                          <span className="statement-heading font-weight-bold">
+                            {capitalTotal + liabilityTotal + pl.amount >
+                            currentAssetsTotal + fixedAssetsTotal
+                              ? capitalTotal + liabilityTotal + pl.amount
+                              : currentAssetsTotal + fixedAssetsTotal}
+                          </span>
+                        </td>
+                      </tr>
+                    </MDBTableBody>
+                  </MDBTable>
+                  <hr />
+                </MDBCol>
+                <MDBCol sm="12" lg="6" className="px-4">
+                  <hr />
+                  <MDBTable borderless>
+                    <MDBTableBody>
+                      <tr>
+                        <td className="float-left">
+                          <span className="statement-heading font-weight-bold">
+                            TOTAL
+                          </span>
+                        </td>
+                        <td className="float-right">
+                          <span className="statement-heading font-weight-bold">
+                            {capitalTotal + liabilityTotal + pl.amount >
+                            currentAssetsTotal + fixedAssetsTotal
+                              ? capitalTotal + liabilityTotal + pl.amount
+                              : currentAssetsTotal + fixedAssetsTotal}
+                          </span>
+                        </td>
+                      </tr>
+                    </MDBTableBody>
+                  </MDBTable>
+                  <hr />
                 </MDBCol>
               </MDBRow>
             </MDBContainer>
